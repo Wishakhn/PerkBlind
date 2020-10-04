@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite"
+    tools:context=".IntroSlider">
+<ImageView
+    android:layout_width="100dp"
+    android:layout_height="100dp"
+    android:src="@drawable/cardicon"
+    android:layout_centerHorizontal="true"
+    android:layout_marginTop="40dp"/>
+    <TextView
+        android:layout_centerHorizontal="true"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/ttsoptionspeak"
+        android:layout_marginBottom="30dp"
+        android:textColor="@color/colorBlack"
+        android:text="Please select one from the below settings"
+        android:textSize="18sp"/>
+    <RadioGroup
+        android:id="@+id/ttsoptionspeak"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:layout_centerInParent="true"
+        >
+        <RadioButton
+            android:id="@+id/Rbtn1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:textColor="@color/colorMustard"
+            android:text="Always Speak the options"/>
+        <RadioButton
+            android:id="@+id/Rbtn2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorMustard"
+            android:text="Only Speak the options on click"/>
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/startBtn"
+        android:layout_width="match_parent"
+        android:layout_marginHorizontal="25dp"
+        android:layout_height="wrap_content"
+        android:text="START"
+        android:enabled="false"
+        android:textColor="@color/colorWhite"
+        android:layout_below="@+id/ttsoptionspeak"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="60dp"
+        android:background="@drawable/btnbackground_disabled"/>
+
+</RelativeLayout>

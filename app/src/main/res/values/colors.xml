@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#000000</color>
+    <color name="colorPrimaryDark">#deddd8</color>
+    <color name="colorAccent">#FFC107</color>
+    <color name="colorBlack">#000000</color>
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="colorLightGrey">#e1e0da</color>
+    <color name="colorMidGrey">#919090</color>
+    <color name="colorDarkGrey">#31322f</color>
+    <color name="colorDominant">#deddd8</color>
+    <color name="colorYellow">#f7c105</color>
+    <color name="colorDarkPeach">#df5251</color>
+    <color name="colorPaleYellow">#e5ca61</color>
+    <color name="colorBrown">#957b61</color>
+    <color name="colorMustard">#cfa70f</color>
+    <color name="colorKayi">#a99a58</color>
+    <color name="colorKayiFade">#EDCFC182</color>
+    <color name="colorLightYellow">#f8d437</color>
+
+</resources>

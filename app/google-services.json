@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "349201606111",
+    "firebase_url": "https://perkblind-eda51.firebaseio.com",
+    "project_id": "perkblind-eda51",
+    "storage_bucket": "perkblind-eda51.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:349201606111:android:8d2b67a5a6ddd80000506a",
+        "android_client_info": {
+          "package_name": "com.example.perkblind"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "349201606111-6h34rks6p6lg5129fs42kki9jcodgi27.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCjbk8CKSRbuaTpSg5AGO-RlfMTyhuoHDo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "349201606111-6h34rks6p6lg5129fs42kki9jcodgi27.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

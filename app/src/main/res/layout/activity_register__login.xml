@@ -1,0 +1,42 @@
+<RelativeLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+android:background="@color/colorWhite"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <include layout="@layout/custom_toolbar"/>
+
+<FrameLayout
+    android:id="@+id/replacer"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/toolbr"
+    android:layout_alignParentBottom="true">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center">
+        <Button
+            android:id="@+id/login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Login"
+            android:textColor="@color/colorWhite"
+            android:background="@drawable/btn1background_normal"
+            android:layout_marginHorizontal="25dp"
+            android:onClick="authEventListner"
+            />
+        <Button
+            android:id="@+id/reg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_marginHorizontal="25dp"
+            android:textColor="@color/colorWhite"
+            android:background="@drawable/btn2background_normal"
+            android:text="Register"
+            android:onClick="authEventListner"
+            />
+    </LinearLayout>
+</FrameLayout>
+</RelativeLayout>

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ReadMail">
+    <include layout="@layout/custom_toolbar"/>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbr">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingHorizontal="20dp"
+            android:orientation="vertical"
+            >
+            <RelativeLayout
+                android:layout_marginTop="30dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp">
+                <ImageView
+                    android:id="@+id/senderpic"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/circle"
+                    android:src="@drawable/ic_person"
+                    android:padding="7dp"
+                    android:tint="@color/colorWhite"/>
+                <TextView
+                    android:id="@+id/senderTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="SENDER TITLE"
+                    android:textColor="@color/colorDarkPeach"
+                    android:textSize="20sp"
+                    android:layout_toRightOf="@+id/senderpic"
+                    android:layout_marginLeft="20dp"
+                    android:textStyle="bold"
+                    android:layout_centerVertical="true"/>
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp">
+                <TextView
+                    android:id="@+id/senderSubj"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="SUBJECT:"
+                    android:textColor="@color/colorDarkPeach"
+                    android:textSize="17sp"
+                    android:layout_marginLeft="20dp"
+                    android:textStyle="bold"
+                    android:layout_centerVertical="true"/>
+                <TextView
+                    android:id="@+id/senderSubjText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="For Certain Purpose"
+                    android:textColor="@color/colorBrown"
+                    android:textSize="17sp"
+                    android:layout_toRightOf="@+id/senderSubj"
+                    android:layout_marginLeft="20dp"
+                    android:layout_centerVertical="true"/>
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp">
+                <TextView
+                    android:id="@+id/senderContent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="CONTENT:"
+                    android:textColor="@color/colorDarkPeach"
+                    android:textSize="17sp"
+                    android:layout_marginLeft="20dp"
+                    android:textStyle="bold"
+                    />
+                <TextView
+                    android:id="@+id/senderContentText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="For Certain PurposeFor Certain PurposeFor Certain PurposeFor Certain PurposeFor Certain PurposeFor Certain PurposeFor Certain PurposeFor Certain PurposeFor Certain PurposeFor Certain PurposeFor Certain PurposeFor Certain PurposeFor Certain PurposeFor Certain PurposeFor Certain PurposeFor Certain Purpose "
+                    android:textColor="@color/colorBrown"
+                    android:textSize="15sp"
+                    android:layout_below="@+id/senderContent"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginLeft="20dp"
+                    />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+
+</RelativeLayout>
