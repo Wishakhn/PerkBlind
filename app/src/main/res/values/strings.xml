@@ -5,4 +5,5 @@
     <string name="welcome_note">Welcome \n to your own PERK BLIND Voice Assistant \n you can
         speak anything to write \n Or \n say Next to move next \n Thank you.
     </string>
+    <string name="close">Close</string>
 </resources>

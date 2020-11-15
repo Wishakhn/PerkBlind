@@ -1,7 +1,9 @@
 package com.example.perkblind;
 
+import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import android.view.KeyEvent;
@@ -13,14 +15,24 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+
+import static com.example.perkblind.HelperClass.hideProgressDialog;
+import static com.example.perkblind.HelperClass.makeAlert;
+
 
 public class LoginFragment extends Fragment {
 
-String email;
-String pass;
-EditText MailET;
-EditText PassET;
-Button login;
+    String email;
+    String pass;
+    EditText MailET;
+    EditText PassET;
+    Button login;
+    Button loginwithQr;
+    FirebaseAuth auth;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -29,14 +41,26 @@ Button login;
         MailET = v.findViewById(R.id.MailET);
         PassET = v.findViewById(R.id.PassET);
         login = v.findViewById(R.id.login);
+        loginwithQr = v.findViewById(R.id.loginwithQr);
+        loginwithQr.setOnClickListener(onClickListner);
         PassET.setOnEditorActionListener(editorLisnter);
+        auth = FirebaseAuth.getInstance();
         return v;
     }
+
+    View.OnClickListener onClickListner = new View.OnClickListener() {
+
+        @Override
+        public void onClick(View view) {
+loginUser(email,pass);
+
+        }
+    };
     TextView.OnEditorActionListener editorLisnter = new TextView.OnEditorActionListener() {
         @Override
         public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
-            if (i == EditorInfo.IME_ACTION_DONE){
-                if (validate()){
+            if (i == EditorInfo.IME_ACTION_DONE) {
+                if (validate()) {
                     login.setEnabled(true);
                 }
             }
@@ -48,9 +72,26 @@ Button login;
         boolean bool = false;
         email = MailET.getText().toString();
         pass = PassET.getText().toString();
-        if(email != null && pass != null & !email.isEmpty() && !pass.isEmpty()){
+        if (email != null && !email.isEmpty() && !pass.isEmpty()) {
             bool = true;
         }
         return bool;
+    }
+    private void loginUser(String email, String pass) {
+        auth.signInWithEmailAndPassword(email,pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if(task.isSuccessful()){
+                    hideProgressDialog();
+                    Intent gotent = new Intent(requireContext(),MainActivity.class);
+                    startActivity(gotent);
+                    requireActivity().finish();
+                }
+                else {
+                    hideProgressDialog();
+                    makeAlert(requireContext(),"Sorry!!", "unable to login user..");
+                }
+            }
+        });
     }
 }
