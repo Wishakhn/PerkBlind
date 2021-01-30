@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         guideBtn = findViewById(R.id.guideBtn);
         settingBtn = findViewById(R.id.settingBtn);
         prefrences = new Prefrences(MainActivity.this);
+        initAppBar("PERK BLIND");
         speechManager = new SpeechTextManager(MainActivity.this, true);
         setListeners();
     }

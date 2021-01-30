@@ -13,6 +13,7 @@ public class QRScanner extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_q_r_scanner);
+        initAppBar("QR SCANNER");
     }
 
     private void initAppBar(String txt) {

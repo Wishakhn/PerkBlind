@@ -13,7 +13,7 @@ public class SendEmail extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_send_email);
-        initAppBar("SEND EMAIL");
+        initAppBar("COMPOSE EMAIL");
     }
 
     private void initAppBar(String txt) {

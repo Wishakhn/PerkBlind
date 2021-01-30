@@ -13,6 +13,7 @@ public class PerkGuide extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_perk_guide);
+        initAppBar("PERK GUIDE");
     }
 
     private void initAppBar(String txt) {

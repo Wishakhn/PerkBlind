@@ -13,6 +13,7 @@ public class ReadMail extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_read_mail);
+        initAppBar("READ MAIL");
     }
 
     private void initAppBar(String txt) {

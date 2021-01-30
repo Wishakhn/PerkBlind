@@ -14,6 +14,7 @@ public class Settings extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
+        initAppBar("SETTINGS");
     }
 
     public void HandleSettings(View view) {
@@ -35,14 +36,15 @@ public class Settings extends AppCompatActivity {
         Intent intent = new Intent(Settings.this, target);
         startActivity(intent);
     }
-    private void initAppBar( String txt) {
+
+    private void initAppBar(String txt) {
         ImageView back = findViewById(R.id.backarrow);
         TextView title = findViewById(R.id.title);
         title.setText(txt);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-finish();
+                finish();
             }
         });
     }
