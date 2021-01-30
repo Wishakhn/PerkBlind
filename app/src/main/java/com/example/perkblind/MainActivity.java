@@ -1,43 +1,37 @@
 package com.example.perkblind;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.speech.RecognizerIntent;
-import android.speech.tts.TextToSpeech;
-import android.speech.tts.UtteranceProgressListener;
-import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
-import java.util.Locale;
 
-public class MainActivity extends AppCompatActivity {
-LinearLayout profileBtn;
-LinearLayout inboxBtn;
-LinearLayout draftBtn;
-LinearLayout composeBtn;
-LinearLayout gmailBtn;
-LinearLayout impBtn;
-LinearLayout guideBtn;
-LinearLayout settingBtn;
-    TextToSpeech tts;
-    String tts_str = "";
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+    LinearLayout profileBtn;
+    LinearLayout inboxBtn;
+    LinearLayout draftBtn;
+    LinearLayout composeBtn;
+    LinearLayout gmailBtn;
+    LinearLayout impBtn;
+    LinearLayout guideBtn;
+    LinearLayout settingBtn;
+    SpeechTextManager speechManager;
+    Prefrences prefrences;
     Handler handler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        handler = new Handler();
         profileBtn = findViewById(R.id.profileBtn);
         inboxBtn = findViewById(R.id.inboxBtn);
         draftBtn = findViewById(R.id.draftBtn);
@@ -46,106 +40,23 @@ LinearLayout settingBtn;
         impBtn = findViewById(R.id.impBtn);
         guideBtn = findViewById(R.id.guideBtn);
         settingBtn = findViewById(R.id.settingBtn);
-        handler = new Handler();
-        tts_str = getResources().getString(R.string.welcome_note);
-        initTTS();
-
-
-    }
-    private void showWelcomedialog() {
-        AlertDialog.Builder welcomenote = new AlertDialog.Builder(MainActivity.this);
-        View v = getLayoutInflater().inflate(R.layout.welcomedialog, null);
-        welcomenote.setView(v);
-        final AlertDialog dialog = welcomenote.create();
-        dialog.show();
-        dialog.setCancelable(false);
-        TextView notetext = v.findViewById(R.id.notetext);
-        notetext.setText(tts_str);
-        ttsListner(dialog);
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                speak(tts_str);
-            }
-        }, 1000);
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-
-
-    }
-    void initTTS() {
-        tts = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
-            @Override
-            public void onInit(int status) {
-                if (status == TextToSpeech.SUCCESS) {
-                    int ttsLang = tts.setLanguage(Locale.UK);
-
-                    if (ttsLang == TextToSpeech.LANG_MISSING_DATA
-                            || ttsLang == TextToSpeech.LANG_NOT_SUPPORTED) {
-                        Log.e("TTS", "The Language is not supported!");
-                    } else {
-                        Log.i("TTS", "Language Supported.");
-                        showWelcomedialog();
-
-                    }
-                    Log.i("TTS", "Initialization success.");
-                } else {
-                    Toast.makeText(getApplicationContext(), "TTS Initialization failed!", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-    }
-    private void speak(String text) {
-        float pitch = (float) 0.0f;
-        if (pitch < 0.1) pitch = 1.0f;
-        float speed = (float) 0.0f;
-        if (speed < 0.1) speed = 1.0f;
-
-        tts.setPitch(pitch);
-        tts.setSpeechRate(speed);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            tts.speak(text, TextToSpeech.QUEUE_FLUSH, null,TextToSpeech.ACTION_TTS_QUEUE_PROCESSING_COMPLETED);
-        }
-        else {
-            tts.speak(text, TextToSpeech.QUEUE_FLUSH, null);
-        }
-
+        prefrences = new Prefrences(MainActivity.this);
+        speechManager = new SpeechTextManager(MainActivity.this, true);
+        setListeners();
     }
 
-    void ttsListner(final AlertDialog dialog){
-        tts.setOnUtteranceProgressListener(new UtteranceProgressListener() {
-            @Override
-            public void onStart(String s) {
-
-            }
-
-            @Override
-            public void onDone(String s) {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        dialog.dismiss();
-                    }
-                });
-            }
-
-            @Override
-            public void onError(String s) {
-
-            }
-        });
+    private void setListeners() {
+        profileBtn.setOnClickListener(this);
+        inboxBtn.setOnClickListener(this);
+        draftBtn.setOnClickListener(this);
+        composeBtn.setOnClickListener(this);
+        gmailBtn.setOnClickListener(this);
+        impBtn.setOnClickListener(this);
+        guideBtn.setOnClickListener(this);
+        settingBtn.setOnClickListener(this);
     }
-    public void getSpeechInput(View view) {
 
-        Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
-        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
-        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
 
-        if (intent.resolveActivity(getPackageManager()) != null) {
-            startActivityForResult(intent, 10);
-        } else {
-            Toast.makeText(this, "Your Device Don't Support Speech Input", Toast.LENGTH_SHORT).show();
-        }
-    }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -154,25 +65,116 @@ LinearLayout settingBtn;
             case 10:
                 if (resultCode == RESULT_OK && data != null) {
                     ArrayList<String> result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
-
-                    actOnCommand(result.get(0), ReadMail.class);
+                    try {
+                        speechManager.actOnCommand(result.get(0), Class.forName(prefrences.getTargetClassName()));
+                    } catch (ClassNotFoundException e) {
+                        e.printStackTrace();
+                    }
                 }
                 break;
         }
     }
 
-    private void actOnCommand(String s, Class NextActivity) {
-        if (s.equalsIgnoreCase("next") || s.contains("next")) {
-            Intent startnext = new Intent(MainActivity.this, NextActivity);
-            startActivity(startnext);
-        } else {
-        }
-    }
 
     @Override
     protected void onPause() {
         super.onPause();
-        tts.stop();
-        tts.shutdown();
+        if (speechManager.tts != null) {
+            speechManager.tts.stop();
+            speechManager.tts.shutdown();
+        }
+    }
+
+    @SuppressLint("NonConstantResourceId")
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.profileBtn:
+                prefrences.saveTargetClass(Profile.class);
+                speechManager.setTts_str(prefrences.getTargetClassName());
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        speechManager.speak(speechManager.getTts_str());
+                    }
+                }, 1000);
+                break;
+            case R.id.inboxBtn:
+                prefrences.saveTargetClass(Inbox.class);
+                speechManager.setTts_str(prefrences.getTargetClassName());
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        speechManager.speak(speechManager.getTts_str());
+                    }
+                }, 1000);
+
+                break;
+            case R.id.composeBtn:
+                prefrences.saveTargetClass(SendEmail.class);
+                speechManager.setTts_str(prefrences.getTargetClassName());
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        speechManager.speak(speechManager.getTts_str());
+                    }
+                }, 1000);
+                break;
+            case R.id.draftBtn:
+                prefrences.saveTargetClass(ReadMail.class);
+                speechManager.setTts_str(prefrences.getTargetClassName());
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        speechManager.speak(speechManager.getTts_str());
+                    }
+                }, 1000);
+                break;
+            case R.id.gmailBtn:
+                break;
+            case R.id.impBtn:
+                prefrences.saveTargetClass(Starred.class);
+                speechManager.setTts_str(prefrences.getTargetClassName());
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        speechManager.speak(speechManager.getTts_str());
+                    }
+                }, 1000);
+                break;
+            case R.id.guideBtn:
+                prefrences.saveTargetClass(PerkGuide.class);
+                speechManager.setTts_str(prefrences.getTargetClassName());
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        speechManager.speak(speechManager.getTts_str());
+                    }
+                }, 1000);
+                break;
+            case R.id.settingBtn:
+                prefrences.saveTargetClass(Settings.class);
+                speechManager.setTts_str(prefrences.getTargetClassName());
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        speechManager.speak(speechManager.getTts_str());
+                    }
+                }, 1000);
+                break;
+
+        }
+    }
+
+    private void initAppBar(String txt) {
+        ImageView back = findViewById(R.id.backarrow);
+        TextView title = findViewById(R.id.title);
+        title.setText(txt);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
     }
 }

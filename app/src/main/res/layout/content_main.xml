@@ -100,14 +100,14 @@
                         android:fontFamily="sans-serif-black"
                         android:textColor="@color/colorBlack"
                         />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="DRAFT"
-                        android:textSize="15sp"
                         android:fontFamily="sans-serif"
+                        android:text="DRAFT"
                         android:textColor="@color/colorBlack"
-                        />
+                        android:textSize="15sp" />
                 </LinearLayout>
                 <LinearLayout
                     android:id="@+id/composeBtn"

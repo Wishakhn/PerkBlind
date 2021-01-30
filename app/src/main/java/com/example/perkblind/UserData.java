@@ -5,13 +5,16 @@ public class UserData {
     private String email = "";
     private String qrStr = "";
     private String password = "";
+    private Boolean isLoggedIn = false;
 
 
-    void  UserData(String userName, String email, String qrStr, String password){
+
+    void  UserData(String userName, String email, String qrStr, String password, Boolean isLoggedIn){
         this.userName = userName;
         this.email = email;
         this.password = password;
         this.qrStr = qrStr;
+        this.isLoggedIn = isLoggedIn;
     }
 
     public String getUserName() {
@@ -44,5 +47,13 @@ public class UserData {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Boolean getLoggedIn() {
+        return isLoggedIn;
+    }
+
+    public void setLoggedIn(Boolean loggedIn) {
+        isLoggedIn = loggedIn;
     }
 }

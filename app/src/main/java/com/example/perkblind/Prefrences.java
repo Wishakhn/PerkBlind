@@ -3,17 +3,23 @@ package com.example.perkblind;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.google.gson.Gson;
+
 public class Prefrences {
 
     private SharedPreferences sherdPrefs;
     private Context context;
-    private final String SHARED_PREFERNCE_NAME = "VIDEO_PREFERNCES";
+    private final String SHARED_PREFERNCE_NAME = "PERK_PREFERNCES";
     private final int PREF_MODE = Context.MODE_PRIVATE;
     SharedPreferences.Editor editor;
     public static final String USER_ONLINE_KEY = "isUserOnline";
     public static final String LAUNCH_KEY = "serviceisRunning";
     public static final String FIRST_RUN = "isFirstRun";
     public static final String TTS_SPEAKER = "SpeakAllInstructions";
+    public static final String IS_LOGGED_IN = "IsUserLogin";
+    public static final String USER_DATA = "SaveUserData";
+    static final String KEY_PREFERNCE_CLASS="KIsUserLoginEY_TARGET_PREFERENCE";
+
 
     public Prefrences(Context context) {
         this.context = context;
@@ -46,6 +52,32 @@ public class Prefrences {
     }
     public int loadIntegerPrefernce(String key){
         return  sherdPrefs.getInt(key,0);
+    }
+
+    public void saveTargetClass( Class target){
+        editor = sherdPrefs.edit();
+        editor.putString(KEY_PREFERNCE_CLASS,target.toString());
+        editor.apply();
+    }
+    public String getTargetClassName(){
+        String class_str = sherdPrefs.getString(KEY_PREFERNCE_CLASS," ");
+        String arr[] = class_str.split(" ");
+        class_str = arr[1];
+        return class_str;
+    }
+
+    public void saveUserData(UserData data){
+        editor = sherdPrefs.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(data);
+        editor.putString(USER_DATA, json);
+        editor.apply();
+    }
+    public UserData fetchUserData(){
+        Gson gson = new Gson();
+        String json = sherdPrefs.getString(USER_DATA, "");
+        UserData user = gson.fromJson(json, UserData.class);
+        return user;
     }
 
 }

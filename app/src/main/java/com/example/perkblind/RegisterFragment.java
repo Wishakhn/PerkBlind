@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -43,10 +44,12 @@ public class RegisterFragment extends Fragment {
     public RegisterFragment() {
         // Required empty public constructor
     }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -72,15 +75,17 @@ public class RegisterFragment extends Fragment {
 
         return v;
     }
+
     View.OnClickListener clickListner = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            if(validate()){
-                displayProgressDialog(requireContext(),"Signing you UP..");
-                register(name,email,password);
+            if (validate()) {
+                displayProgressDialog(requireContext(), "Signing you UP..");
+                register(name, email, password);
             }
         }
     };
+
     private boolean validate() {
         boolean bool = false;
         name = NameET.getText().toString();

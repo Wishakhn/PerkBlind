@@ -33,6 +33,8 @@ public class LoginFragment extends Fragment {
     Button login;
     Button loginwithQr;
     FirebaseAuth auth;
+    Prefrences prefrences;
+    SpeechTextManager speechManager;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -45,6 +47,8 @@ public class LoginFragment extends Fragment {
         loginwithQr.setOnClickListener(onClickListner);
         PassET.setOnEditorActionListener(editorLisnter);
         auth = FirebaseAuth.getInstance();
+        prefrences = new Prefrences(requireContext());
+        speechManager = new SpeechTextManager(requireActivity(),false);
         return v;
     }
 
@@ -77,15 +81,22 @@ loginUser(email,pass);
         }
         return bool;
     }
-    private void loginUser(String email, String pass) {
+    private void loginUser(String email, final String pass) {
         auth.signInWithEmailAndPassword(email,pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
+                    UserData data = new UserData();
+                    prefrences.saveUserData(data);
+                    prefrences.saveBooleanPrefernce(prefrences.IS_LOGGED_IN,data.getLoggedIn());
                     hideProgressDialog();
-                    Intent gotent = new Intent(requireContext(),MainActivity.class);
-                    startActivity(gotent);
-                    requireActivity().finish();
+                  if (prefrences.loadBooleanPrefernce(prefrences.FIRST_RUN)){
+                      speechManager.moveToScreen(IntroSlider.class);
+                  }
+                  else {
+                      speechManager.moveToScreen(MainActivity.class);
+                      requireActivity().finish();
+                  }
                 }
                 else {
                     hideProgressDialog();

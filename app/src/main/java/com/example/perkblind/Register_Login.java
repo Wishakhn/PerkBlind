@@ -18,6 +18,7 @@ public class Register_Login extends AppCompatActivity {
     FragmentManager fm;
     FragmentTransaction ft;
     final static String MAIN_TAG="PERK BLIND";
+    SpeechTextManager speechManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,12 +28,14 @@ public class Register_Login extends AppCompatActivity {
         title = findViewById(R.id.title);
         replacer = findViewById(R.id.replacer);
         fm = getSupportFragmentManager();
+        speechManager = new SpeechTextManager(Register_Login.this,false);
         initAppBar(MAIN_TAG);
 
     }
 
     private void initAppBar(String txt) {
         title.setText(txt);
+        back.setVisibility(View.INVISIBLE);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
