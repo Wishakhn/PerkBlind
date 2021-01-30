@@ -1,11 +1,98 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".QRScanner">
-    <include layout="@layout/custom_toolbar"/>
+
+    <include
+        android:id="@+id/tab"
+        layout="@layout/custom_toolbar" />
+
+    <com.example.perkblind.qr.QRCodeReaderView
+        android:id="@+id/qrCodeReaderView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tab" />
 
 
-</RelativeLayout>
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ivOverLay"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.343" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvScanToProceed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="14dp"
+        android:layout_marginEnd="14dp"
+        android:layout_marginBottom="135dp"
+        android:background="@drawable/cornor_edges_black"
+        android:gravity="center"
+        android:paddingHorizontal="30dp"
+        android:paddingTop="4dp"
+        android:paddingBottom="12dp"
+        android:text="Scan a PERK QR code to proceed"
+        android:textColor="@color/colorWhite"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ivLibrary"
+        android:layout_width="46dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="50dp"
+        android:src="@drawable/ic_image_library"
+        app:layout_constraintEnd_toEndOf="@id/tvScanToProceed"
+        app:layout_constraintTop_toBottomOf="@id/tvScanToProceed" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvImageLibrary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:text="Gallery"
+        android:textColor="@color/colorWhite"
+        app:layout_constraintEnd_toEndOf="@id/ivLibrary"
+        app:layout_constraintStart_toStartOf="@id/ivLibrary"
+        app:layout_constraintTop_toBottomOf="@id/ivLibrary" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ivMyQrCode"
+        android:layout_width="46dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="50dp"
+        android:src="@drawable/ic_my_qr_code"
+        app:layout_constraintStart_toStartOf="@id/tvScanToProceed"
+        app:layout_constraintTop_toBottomOf="@id/tvScanToProceed" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvMyQrCode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:text="My QR Code"
+        android:textColor="@color/colorWhite"
+        app:layout_constraintEnd_toEndOf="@id/ivMyQrCode"
+        app:layout_constraintStart_toStartOf="@id/ivMyQrCode"
+        app:layout_constraintTop_toBottomOf="@id/ivMyQrCode" />
+    =
+</androidx.constraintlayout.widget.ConstraintLayout>
+

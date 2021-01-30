@@ -31,9 +31,6 @@
                 android:src="@drawable/perk_icon"
                 android:padding="10dp"/>
 
-
-
-
         </LinearLayout>
 
 </RelativeLayout>

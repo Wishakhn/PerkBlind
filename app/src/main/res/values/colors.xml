@@ -8,6 +8,7 @@
     <color name="colorLightGrey">#e1e0da</color>
     <color name="colorMidGrey">#919090</color>
     <color name="colorDarkGrey">#31322f</color>
+    <color name="colorDarkGreyFaded">#C331322F</color>
     <color name="colorDominant">#deddd8</color>
     <color name="colorYellow">#f7c105</color>
     <color name="colorDarkPeach">#df5251</color>

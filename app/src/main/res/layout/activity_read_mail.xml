@@ -33,7 +33,7 @@
                     android:id="@+id/senderTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="SENDER TITLE"
+                    android:text="Jhon Eric"
                     android:textColor="@color/colorDarkPeach"
                     android:textSize="20sp"
                     android:layout_toRightOf="@+id/senderpic"
@@ -60,7 +60,7 @@
                     android:id="@+id/senderSubjText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="For Certain Purpose"
+                    android:text="For Certain Lead Magent"
                     android:textColor="@color/colorBrown"
                     android:textSize="17sp"
                     android:layout_toRightOf="@+id/senderSubj"
@@ -92,6 +92,21 @@
                     android:layout_below="@+id/senderContent"
                     android:layout_marginTop="15dp"
                     android:layout_marginLeft="20dp"
+                    tools:text="Hi Ali,\n
+
+I’m so glad you signed up for the [lead magnet name].
+
+In this [lead magnet type], you’ll learn [describe what they will learn in the lead magnet].
+
+[Link]Click Here to Gain Immediate access to [lead magnet name] ⇒[Link]
+
+If you’re unable to access it, just reply to this email and let me know. I will sort it out for you ASAP.
+
+And if you need help with [a service you offer related to the lead magnet], please check out this page [link to your services landing page].
+
+I have helped several people with this. Here’s a link to a case study [link to a case study].
+
+\n\nThank you,"
                     />
 
             </RelativeLayout>

@@ -26,9 +26,8 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.HashMap;
 
+import static com.example.perkblind.HelperClass.displayProgressDialog;
 import static com.example.perkblind.HelperClass.hideProgressDialog;
-
-
 public class RegisterFragment extends Fragment {
     String name;
     String email;
@@ -37,22 +36,17 @@ public class RegisterFragment extends Fragment {
     EditText NameET;
     EditText MailET;
     EditText PassET;
-    EditText CnfrmPassET;
-
+    EditText ConfirmPassET;
     FirebaseAuth auth;
     DatabaseReference firebaseRef;
 
     public RegisterFragment() {
         // Required empty public constructor
     }
-
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -61,9 +55,9 @@ public class RegisterFragment extends Fragment {
         NameET = v.findViewById(R.id.NameET);
         MailET = v.findViewById(R.id.MailET);
         PassET = v.findViewById(R.id.PassET);
-        CnfrmPassET = v.findViewById(R.id.CnfrmPassET);
+        ConfirmPassET = v.findViewById(R.id.CnfrmPassET);
         final Button regbtn = v.findViewById(R.id.regbtn);
-        CnfrmPassET.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+        ConfirmPassET.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
                 if (i == EditorInfo.IME_ACTION_DONE) {
@@ -78,28 +72,26 @@ public class RegisterFragment extends Fragment {
 
         return v;
     }
-
     View.OnClickListener clickListner = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
             if(validate()){
+                displayProgressDialog(requireContext(),"Signing you UP..");
                 register(name,email,password);
             }
         }
     };
-
     private boolean validate() {
         boolean bool = false;
         name = NameET.getText().toString();
         password = PassET.getText().toString();
-        confirmPass = CnfrmPassET.getText().toString();
+        confirmPass = ConfirmPassET.getText().toString();
         email = MailET.getText().toString();
         if (name != null && email != null && !name.isEmpty() && !email.isEmpty() && password != null && confirmPass != null && !password.isEmpty() && !confirmPass.isEmpty() && password.equalsIgnoreCase(confirmPass)) {
             bool = true;
         }
         return bool;
     }
-
     private void register(final String uname, String email, String pass) {
         auth.createUserWithEmailAndPassword(email,pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
@@ -118,7 +110,7 @@ public class RegisterFragment extends Fragment {
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()){
                                 hideProgressDialog();
-                             moveToLoging();
+                                moveToLogging();
                             }
                         }
                     });
@@ -132,13 +124,11 @@ public class RegisterFragment extends Fragment {
             }
         });
     }
-
-    private void moveToLoging() {
+    private void moveToLogging() {
         LoginFragment frag = new LoginFragment();
         FragmentTransaction fragmentTransaction = getFragmentManager() != null ? getFragmentManager().beginTransaction() : null;
         fragmentTransaction.replace(R.id.replacer, frag);
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
     }
-
 }

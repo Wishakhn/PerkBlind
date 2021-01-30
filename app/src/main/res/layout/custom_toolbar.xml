@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:background="@color/colorWhite"
     android:padding="10dp"
     android:id="@+id/toolbr"
@@ -22,5 +24,6 @@
     android:text="LABEL"
     android:fontFamily="sans-serif-black"
     android:layout_toRightOf="@+id/backarrow"
-    android:layout_marginLeft="20dp"/>
+    android:layout_marginLeft="20dp"
+    tools:text="Perk Blind"/>
 </RelativeLayout>

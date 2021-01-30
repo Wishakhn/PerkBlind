@@ -4,7 +4,125 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SendEmail">
+    tools:context=".ReadMail">
     <include layout="@layout/custom_toolbar"/>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbr">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingHorizontal="20dp"
+            android:orientation="vertical"
+            >
+            <RelativeLayout
+                android:layout_marginTop="30dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp">
+                <ImageView
+                    android:id="@+id/senderpic"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/circle"
+                    android:src="@drawable/ic_person"
+                    android:padding="7dp"
+                    app:tint="@color/colorWhite" />
+                <TextView
+                    android:id="@+id/senderTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="To:"
+                    android:textColor="@color/colorDarkPeach"
+                    android:textSize="20sp"
+                    android:layout_toRightOf="@+id/senderpic"
+                    android:layout_marginLeft="20dp"
+                    android:textStyle="bold"
+                    android:layout_centerVertical="true"/>
+                <TextView
+                    android:id="@+id/RecieverName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="jhon12@gmail.com"
+                    android:textColor="@color/colorDarkGrey"
+                    android:textSize="17sp"
+                    android:layout_toRightOf="@+id/senderTitle"
+                    android:layout_marginLeft="20dp"
+                    android:layout_centerVertical="true"/>
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp">
+                <TextView
+                    android:id="@+id/senderSubj"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="SUBJECT:"
+                    android:textColor="@color/colorDarkPeach"
+                    android:textSize="17sp"
+                    android:layout_marginLeft="20dp"
+                    android:textStyle="bold"
+                    android:layout_centerVertical="true"/>
+                <TextView
+                    android:id="@+id/senderSubjText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="New Magnet Type"
+                    android:textColor="@color/colorBrown"
+                    android:textSize="17sp"
+                    android:layout_toRightOf="@+id/senderSubj"
+                    android:layout_marginLeft="20dp"
+                    android:layout_centerVertical="true"/>
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp">
+                <TextView
+                    android:id="@+id/senderContent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="CONTENT:"
+                    android:textColor="@color/colorDarkPeach"
+                    android:textSize="17sp"
+                    android:layout_marginLeft="20dp"
+                    android:textStyle="bold"
+                    />
+                <TextView
+                    android:id="@+id/senderContentText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="For Certain PurposeFor Certain PurposeFor Certain PurposeFor Certain PurposeFor Certain PurposeFor Certain PurposeFor Certain PurposeFor Certain PurposeFor Certain PurposeFor Certain PurposeFor Certain PurposeFor Certain PurposeFor Certain PurposeFor Certain PurposeFor Certain PurposeFor Certain Purpose "
+                    android:textColor="@color/colorBrown"
+                    android:textSize="15sp"
+                    android:layout_below="@+id/senderContent"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginLeft="20dp"
+                    tools:text="Hi Jhon, \n
+
+I’m so glad you signed up for the [lead magnet name].
+
+In this [lead magnet type], you’ll learn [describe what they will learn in the lead magnet].
+
+[Link]Click Here to Gain Immediate access to [lead magnet name] ⇒[Link]
+
+If you’re unable to access it, just reply to this email and let me know. I will sort it out for you ASAP.
+
+And if you need help with [a service you offer related to the lead magnet], please check out this page [link to your services landing page].
+
+I have helped several people with this. Here’s a link to a case study [link to a case study].
+
+Thank you,"
+                    />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
 
 </RelativeLayout>

@@ -49,9 +49,7 @@ public class HelperClass {
         int checkCameraPermission = ContextCompat.checkSelfPermission(context, "android.permission.CAMERA");
         return writeExternalResults == 0 && checkCameraPermission == 0 && checkSelfPermission == 0 ;
     }
-
     public static void startEditing(EditText inputEditText, Context context) {
-
         inputEditText.requestFocus();
         inputEditText.setFocusableInTouchMode(true);
         InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);

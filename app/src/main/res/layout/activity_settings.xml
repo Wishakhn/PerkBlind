@@ -1,10 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.appcompat.widget.LinearLayoutCompat
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".Settings">
     <include layout="@layout/custom_toolbar"/>
-
-</RelativeLayout>
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/changPass"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Change password"
+        android:gravity="center"
+        android:drawablePadding="4dp"
+        android:textSize="18sp"
+        android:drawableTint="@color/colorBrown"
+        android:textColor="@color/colorBlack"
+        android:layout_marginTop="30dp"
+        android:drawableStart="@drawable/ic_lock_24"
+        android:layout_marginStart="20dp"
+        />
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/setGuide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Perk guide"
+        android:gravity="center"
+        android:drawablePadding="5dp"
+        android:textSize="18sp"
+        android:drawableTint="@color/colorBrown"
+        android:textColor="@color/colorBlack"
+        android:layout_marginTop="30dp"
+        android:drawableStart="@drawable/ic_guide"
+        android:layout_marginStart="20dp"
+        />
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/genQR"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Generate QR"
+        android:gravity="center"
+        android:drawablePadding="4dp"
+        android:textSize="18sp"
+        android:drawableTint="@color/colorBrown"
+        android:textColor="@color/colorBlack"
+        android:layout_marginTop="30dp"
+        android:drawableStart="@drawable/ic_baseline_qr_code_24"
+        android:layout_marginStart="20dp"
+        />
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/logout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Logout"
+        android:gravity="center"
+        android:drawablePadding="4dp"
+        android:textSize="18sp"
+        android:drawableTint="@color/colorBrown"
+        android:textColor="@color/colorBlack"
+        android:layout_marginTop="30dp"
+        android:drawableStart="@drawable/ic_lock_24"
+        android:layout_marginStart="20dp"
+        />
+</androidx.appcompat.widget.LinearLayoutCompat>
