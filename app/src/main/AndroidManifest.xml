@@ -23,7 +23,7 @@
         <activity android:name=".PerkGuide" />
         <activity android:name=".QRScanner" />
         <activity android:name=".Settings" />
-        <activity android:name=".ReadMail" />
+        <activity android:name=".gmail.ReadMail" />
         <activity android:name=".gmail.SendEmail" />
         <activity android:name=".Register_Login" />
         <activity android:name=".SplashActivity">

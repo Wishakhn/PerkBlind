@@ -13,6 +13,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.fyp.perkblind.gmail.Inbox;
+import com.fyp.perkblind.gmail.ReadMail;
 import com.fyp.perkblind.gmail.SendEmail;
 import com.fyp.perkblind.gmail.Starred;
 
@@ -41,7 +42,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         draftBtn = findViewById(R.id.draftBtn);
         composeBtn = findViewById(R.id.composeBtn);
         gmailBtn = findViewById(R.id.gmailBtn);
-        impBtn = findViewById(R.id.impBtn);
         guideBtn = findViewById(R.id.guideBtn);
         settingBtn = findViewById(R.id.settingBtn);
         prefrences = new Prefrences(MainActivity.this);
@@ -80,7 +80,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
         }
     }
-
 
     @Override
     protected void onPause() {
@@ -137,16 +136,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }, 1000);
                 break;
             case R.id.gmailBtn:
-                break;
-            case R.id.impBtn:
-                prefrences.saveTargetClass(Starred.class);
-                speechManager.setTts_str(prefrences.getTargetClassName());
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        speechManager.speak(speechManager.getTts_str());
-                    }
-                }, 1000);
+
                 break;
             case R.id.guideBtn:
                 prefrences.saveTargetClass(PerkGuide.class);

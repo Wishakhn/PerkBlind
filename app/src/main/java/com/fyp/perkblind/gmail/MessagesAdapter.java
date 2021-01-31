@@ -16,7 +16,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.fyp.perkblind.HelperClass;
 import com.fyp.perkblind.R;
-import com.fyp.perkblind.ReadMail;
 
 import java.util.ArrayList;
 import java.util.List;

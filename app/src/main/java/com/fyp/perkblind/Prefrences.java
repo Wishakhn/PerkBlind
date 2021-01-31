@@ -9,7 +9,7 @@ public class Prefrences {
 
     private SharedPreferences sherdPrefs;
     private Context context;
-    private final String SHARED_PREFERNCE_NAME = "PERK_PREFERNCES";
+    private final String SHARED_PREFERENCE_NAME = "PERK_PREFERNCES";
     private final int PREF_MODE = Context.MODE_PRIVATE;
     SharedPreferences.Editor editor;
     public static final String USER_ONLINE_KEY = "isUserOnline";
@@ -26,7 +26,7 @@ public class Prefrences {
     }
 
     public void initPrefernce(){
-        sherdPrefs = context.getSharedPreferences(SHARED_PREFERNCE_NAME,PREF_MODE);
+        sherdPrefs = context.getSharedPreferences(SHARED_PREFERENCE_NAME,PREF_MODE);
     }
 
     public  void saveUserState(boolean state){
