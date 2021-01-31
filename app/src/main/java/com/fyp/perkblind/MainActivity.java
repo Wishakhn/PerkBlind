@@ -57,7 +57,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         draftBtn.setOnClickListener(this);
         composeBtn.setOnClickListener(this);
         gmailBtn.setOnClickListener(this);
-        impBtn.setOnClickListener(this);
         guideBtn.setOnClickListener(this);
         settingBtn.setOnClickListener(this);
     }
