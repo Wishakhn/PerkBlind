@@ -25,7 +25,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     LinearLayout draftBtn;
     LinearLayout composeBtn;
     LinearLayout gmailBtn;
-    LinearLayout impBtn;
     LinearLayout guideBtn;
     LinearLayout settingBtn;
     SpeechTextManager speechManager;
