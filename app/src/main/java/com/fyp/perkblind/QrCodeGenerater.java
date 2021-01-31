@@ -7,21 +7,14 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-
-public class QRCodeViewer extends AppCompatActivity {
-    Prefrences prefrences;
-    ImageView viewQR;
+public class QrCodeGenerater extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_q_r_code_viewer);
-        initAppBar("QR CODE VIEWER");
-        prefrences = new Prefrences(QRCodeViewer.this);
-        prefrences.initPrefernce();
-        viewQR = findViewById(R.id.viewQR);
-        Glide.with(this).load(prefrences.fetchUserData().getQrCode()).into(viewQR);
+        setContentView(R.layout.activity_qr_code_generater);
+        initAppBar("QR CODE GENERATOR");
+
     }
     private void initAppBar(String txt) {
         ImageView back = findViewById(R.id.backarrow);

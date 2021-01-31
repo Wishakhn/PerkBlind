@@ -16,7 +16,8 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".QRCodeViewer"></activity>
+        <activity android:name=".QrCodeGenerater"></activity>
+        <activity android:name=".QRCodeViewer" />
         <activity android:name=".LoginToGmail" />
         <activity android:name=".gmail.Inbox" />
         <activity android:name=".Profile" />
