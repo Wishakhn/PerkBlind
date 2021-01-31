@@ -145,7 +145,7 @@ public class LoginFragment extends Fragment {
                 UserData data = new UserData(userId, name, email, qr, password, status);
                 prefrences.saveUserData(data);
                 prefrences.saveBooleanPrefernce(Prefrences.IS_LOGGED_IN, true);
-                Intent intent = new Intent(requireContext(), MainActivity.class);
+                Intent intent = new Intent(requireContext(), LoginToGmail.class);
                 requireActivity().startActivity(intent);
                 requireActivity().finish();
                 System.out.println("Database is :" + dataSnapshot.getChildren());

@@ -3,6 +3,7 @@ package com.fyp.perkblind;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.fyp.perkblind.gmail.GmailData;
 import com.google.gson.Gson;
 
 public class Prefrences {
@@ -18,6 +19,7 @@ public class Prefrences {
     public static final String TTS_SPEAKER = "SpeakAllInstructions";
     public static final String IS_LOGGED_IN = "IsUserLogin";
     public static final String USER_DATA = "SaveUserData";
+    public static final String USER_GMAIL_DATA = "SaveUserGmailData";
     static final String KEY_PREFERNCE_CLASS="KIsUserLoginEY_TARGET_PREFERENCE";
 
 
@@ -94,6 +96,21 @@ public class Prefrences {
     public  void  removePrefernce(String key){
         editor.remove(key);
         editor.commit();
+    }
+
+    public void saveGmailData(GmailData data){
+        editor = sherdPrefs.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(data);
+        editor.putString(USER_GMAIL_DATA, json);
+        editor.apply();
+    }
+
+    public GmailData fetchUserGmailData(){
+        Gson gson = new Gson();
+        String json = sherdPrefs.getString(USER_GMAIL_DATA, "");
+        GmailData user = gson.fromJson(json, GmailData.class);
+        return user;
     }
 
 }

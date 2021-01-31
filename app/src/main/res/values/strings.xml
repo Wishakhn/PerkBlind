@@ -7,7 +7,10 @@
     </string>
     <string name="close">Close</string>
     <string name="gmailkey">AIzaSyAbQKFgb9x3i2CIxR98tGz314xntRjvuI0</string>
+    <string name="clientSecret">T7MUlUMf0jNmVAUzaJuIjoW_</string>
     <string name="gmailAPIKey">AIzaSyDWlbVgnMzKwyEPplFDe35PdxbOlCup66o</string>
+    <string name="AuthClient">886629480229-9macvs0horu6id8eptdva63v0s87fv5o.apps.googleusercontent.com</string>
+    <string name="clientID">886629480229-gf37kdbokdea9e1afeja8pff4cttnfh5.apps.googleusercontent.com</string>
 
     <string name="choose_account">Choose Account</string>
     <string name="preferences_file_name">com.cognition.android.mailboxapp.PREFERENCES_FILE</string>
