@@ -22,7 +22,6 @@ import java.util.Locale;
 public class SpeechTextManager implements ISpeechTextManager {
     TextToSpeech tts;
     TextToSpeech tts_alert;
-
     String tts_str = "";
     Handler handler;
     Context context;
@@ -31,6 +30,7 @@ public class SpeechTextManager implements ISpeechTextManager {
     Boolean userSpeech = false;
     Boolean DismissIO = false;
     AlertDialog dialog;
+    AlertDialog dialog2;
 
     public SpeechTextManager(Context activity, Boolean showDialog) {
         this.context = activity;
@@ -120,16 +120,15 @@ public class SpeechTextManager implements ISpeechTextManager {
     if (tts_alert.isSpeaking())tts_alert.stop();
     }
 
-
     public void showOptionDialog(String text) {
         showDialog = true;
         AlertDialog.Builder welcomenote = new AlertDialog.Builder(context);
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) ;
         View v = inflater.inflate(R.layout.welcomedialog, null);
         welcomenote.setView(v);
-        dialog = welcomenote.create();
-        dialog.show();
-        dialog.setCancelable(false);
+        dialog2 = welcomenote.create();
+        dialog2.show();
+        dialog2.setCancelable(false);
         TextView notetext = v.findViewById(R.id.notetext);
         setTts_str("You have selected "+text+" option to proceed please speak Next or to decline please speak Dismiss. Thank you.");
         notetext.setText(getTts_str());
@@ -155,7 +154,7 @@ public class SpeechTextManager implements ISpeechTextManager {
                 activity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        dialog.dismiss();
+                        dialog2.dismiss();
                         getSpeechInput();
                     }
                 });
@@ -177,7 +176,6 @@ public class SpeechTextManager implements ISpeechTextManager {
 
             @Override
             public void onDone(String s) {
-                pauseTTS();
                 activity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -244,7 +242,7 @@ public class SpeechTextManager implements ISpeechTextManager {
             context.startActivity(startnext);
         } else {
             if (showDialog) {
-                dialog.dismiss();
+                dialog2.dismiss();
                 if (tts.isSpeaking()) {
                     tts.stop();
                 }
