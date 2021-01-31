@@ -80,7 +80,7 @@ public class RegisterFragment extends Fragment {
         public void onClick(View view) {
             if (validate()) {
                 displayProgressDialog(requireContext(), "Signing you UP..");
-                register(name, email, password);
+                register(name, email, password,"false","null");
             }
         }
     };
@@ -96,7 +96,7 @@ public class RegisterFragment extends Fragment {
         }
         return bool;
     }
-    private void register(final String uname, String email, String pass) {
+    private void register(final String uname, final String email, final String pass, final String LoggedIn, final String QR) {
         auth.createUserWithEmailAndPassword(email,pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
@@ -109,6 +109,10 @@ public class RegisterFragment extends Fragment {
                     HashMap<String,String> hashmap = new HashMap<String, String>();
                     hashmap.put("id",userId);
                     hashmap.put("username",uname);
+                    hashmap.put("password",pass);
+                    hashmap.put("email",email);
+                    hashmap.put("isLoggedIn",LoggedIn);
+                    hashmap.put("qrCode",QR);
                     firebaseRef.setValue(hashmap).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {

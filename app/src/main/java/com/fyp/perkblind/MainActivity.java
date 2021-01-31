@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         guideBtn = findViewById(R.id.guideBtn);
         settingBtn = findViewById(R.id.settingBtn);
         prefrences = new Prefrences(MainActivity.this);
+        prefrences.initPrefernce();
         initAppBar("PERK BLIND");
         speechManager = new SpeechTextManager(MainActivity.this, true);
         setListeners();
@@ -170,12 +171,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void initAppBar(String txt) {
         ImageView back = findViewById(R.id.backarrow);
         TextView title = findViewById(R.id.title);
+        back.setVisibility(View.INVISIBLE);
         title.setText(txt);
-        back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
     }
 }

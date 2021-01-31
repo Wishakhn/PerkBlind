@@ -1,5 +1,6 @@
 package com.fyp.perkblind;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -18,7 +19,14 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
+import static com.fyp.perkblind.HelperClass.displayProgressDialog;
 import static com.fyp.perkblind.HelperClass.hideProgressDialog;
 import static com.fyp.perkblind.HelperClass.makeAlert;
 
@@ -34,12 +42,14 @@ public class LoginFragment extends Fragment {
     FirebaseAuth auth;
     Prefrences prefrences;
     SpeechTextManager speechManager;
+    DatabaseReference firebaseRef;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         auth = FirebaseAuth.getInstance();
         prefrences = new Prefrences(requireContext());
+        prefrences.initPrefernce();
     }
 
     @Override
@@ -86,25 +96,65 @@ public class LoginFragment extends Fragment {
     }
 
     private void loginUser(String email, final String pass) {
+        displayProgressDialog(requireContext(), "Logging In....");
         auth.signInWithEmailAndPassword(email, pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
+
                 if (task.isSuccessful()) {
-                    UserData data = new UserData();
-                    prefrences.saveUserData(data);
-                    prefrences.saveBooleanPrefernce(prefrences.IS_LOGGED_IN, data.getLoggedIn());
-                    hideProgressDialog();
-                    if (prefrences.loadBooleanPrefernce(prefrences.FIRST_RUN)) {
-                        speechManager.moveToScreen(IntroSlider.class);
-                    } else {
-                        speechManager.moveToScreen(MainActivity.class);
-                        requireActivity().finish();
-                    }
+                    FirebaseUser fUser = auth.getCurrentUser();
+                    assert fUser != null;
+                    final String userId = fUser.getUid();
+                    System.out.println("User ID is " + userId);
+                    firebaseRef = FirebaseDatabase.getInstance().getReference("Users").child(userId).child("isLoggedIn");
+                    firebaseRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            firebaseRef.setValue("true");
+                            loadUserData(userId);
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }
+                    });
+
                 } else {
                     hideProgressDialog();
-                    makeAlert(requireContext(), "Sorry!!", "unable to login user..");
+                    makeAlert(getContext(), "SORRY", "" + task.getException().getMessage());
+
                 }
             }
         });
+    }
+
+    private void loadUserData(String userId) {
+        firebaseRef = FirebaseDatabase.getInstance().getReference("Users").child(userId);
+        firebaseRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                hideProgressDialog();
+                UserData modelUser = dataSnapshot.getValue(UserData.class);
+                String userId = modelUser.getId();
+                String name = modelUser.getUsername();
+                String email = modelUser.getEmail();
+                String status = modelUser.getLoggedIn();
+                String qr = modelUser.getQrCode();
+                String password = modelUser.getPassword();
+                UserData data = new UserData(userId, name, email, qr, password, status);
+                prefrences.saveUserData(data);
+                prefrences.saveBooleanPrefernce(prefrences.IS_LOGGED_IN, Boolean.valueOf(status));
+                Intent intent = new Intent(requireContext(), MainActivity.class);
+                requireActivity().startActivity(intent);
+                requireActivity().finish();
+                System.out.println("Database is :" + dataSnapshot.getChildren());
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+            }
+        });
+
     }
 }

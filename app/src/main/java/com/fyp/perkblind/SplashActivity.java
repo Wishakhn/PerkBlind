@@ -29,13 +29,13 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     private void startSplash() {
-        if (isFirstrun) {
+        if (!isFirstrun) {
             Intent tent = new Intent(this, Register_Login.class);
             startActivity(tent);
-            prefs.saveBooleanPrefernce(FIRST_RUN, false);
+            prefs.saveBooleanPrefernce(FIRST_RUN, true);
             finish();
         } else {
-            if (!prefs.loadBooleanPrefernce(prefs.IS_LOGGED_IN)) {
+            if (prefs.loadBooleanPrefernce(prefs.IS_LOGGED_IN)) {
                 Intent tent = new Intent(this, MainActivity.class);
                 startActivity(tent);
                 finish();

@@ -1,28 +1,31 @@
 package com.fyp.perkblind;
 
 public class UserData {
-    private String userName ="";
+    private String id ="";
+    private String username ="";
     private String email = "";
-    private String qrStr = "";
+    private String qrCode = "";
     private String password = "";
-    private Boolean isLoggedIn = false;
+    private String isLoggedIn = "";
 
+    public UserData() {
+    }
 
-
-    void  UserData(String userName, String email, String qrStr, String password, Boolean isLoggedIn){
-        this.userName = userName;
+    public UserData(String id, String username, String email, String qrCode, String password, String isLoggedIn) {
+        this.id = id;
+        this.username = username;
         this.email = email;
+        this.qrCode = qrCode;
         this.password = password;
-        this.qrStr = qrStr;
         this.isLoggedIn = isLoggedIn;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getEmail() {
@@ -33,12 +36,12 @@ public class UserData {
         this.email = email;
     }
 
-    public String getQrStr() {
-        return qrStr;
+    public String getQrCode() {
+        return qrCode;
     }
 
-    public void setQrStr(String qrStr) {
-        this.qrStr = qrStr;
+    public void setQrCode(String qrCode) {
+        this.qrCode = qrCode;
     }
 
     public String getPassword() {
@@ -49,11 +52,19 @@ public class UserData {
         this.password = password;
     }
 
-    public Boolean getLoggedIn() {
+    public String getLoggedIn() {
         return isLoggedIn;
     }
 
-    public void setLoggedIn(Boolean loggedIn) {
+    public void setLoggedIn(String loggedIn) {
         isLoggedIn = loggedIn;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

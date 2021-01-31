@@ -45,7 +45,7 @@ public class Prefrences {
         editor.apply();
     }
     public boolean loadBooleanPrefernce(String key){
-        return sherdPrefs.getBoolean(key,true);
+        return sherdPrefs.getBoolean(key,false);
     }
     public String loadStringPreference(String key){
         return  sherdPrefs.getString(key," ");
