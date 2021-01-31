@@ -30,9 +30,11 @@ public class SpeechTextManager implements ISpeechTextManager {
     Boolean DismissIO = false;
     AlertDialog dialog;
 
-    public SpeechTextManager(Activity activity, Boolean showDialog) {
-        this.context = activity.getApplicationContext();
+    public SpeechTextManager(Context activity, Boolean showDialog) {
+        this.context = activity;
         this.showDialog = showDialog;
+        this.activity = (Activity) activity;
+        handler = new Handler();
         setTts_str(context.getResources().getString(R.string.welcome_note));
         initSpeechTextManager(showDialog);
     }
@@ -51,7 +53,7 @@ public class SpeechTextManager implements ISpeechTextManager {
                     } else {
                         Log.i("TTS", "Language Supported.");
                         if (showDialog) {
-                            showWelcomeDialog();
+                                   showWelcomeDialog();
                         }
                     }
                     Log.i("TTS", "Initialization success.");
@@ -67,7 +69,8 @@ public class SpeechTextManager implements ISpeechTextManager {
     public void showWelcomeDialog() {
         showDialog = true;
         AlertDialog.Builder welcomenote = new AlertDialog.Builder(context);
-        View v = LayoutInflater.from(context).inflate(R.layout.welcomedialog, null);
+        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) ;
+        View v = inflater.inflate(R.layout.welcomedialog, null);
         welcomenote.setView(v);
         dialog = welcomenote.create();
         dialog.show();
@@ -99,15 +102,12 @@ public class SpeechTextManager implements ISpeechTextManager {
                     public void run() {
                         if (showDialog) {
                             dialog.dismiss();
-                        }
-                        else {
-                            if (getUserSpeech()){
+                        } else {
+                            if (getUserSpeech()) {
                                 getSpeechInput();
-                            }
-                            else if (getDismissIO()){
+                            } else if (getDismissIO()) {
                                 moveToScreen(MainActivity.class);
-                            }
-                            else {
+                            } else {
                                 setTts_str("To open this screen please command Next and to dismiss your action please command Dismiss");
                                 showWelcomeDialog();
                                 setUserSpeech(true);
@@ -160,9 +160,9 @@ public class SpeechTextManager implements ISpeechTextManager {
             Intent startnext = new Intent(context, NextActivity);
             context.startActivity(startnext);
         } else {
-            if (showDialog){
+            if (showDialog) {
                 dialog.dismiss();
-                if (tts.isSpeaking()){
+                if (tts.isSpeaking()) {
                     tts.stop();
                 }
             }
