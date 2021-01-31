@@ -3,6 +3,8 @@ package com.fyp.perkblind;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.speech.RecognizerIntent;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -23,6 +25,8 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
 
+import java.util.ArrayList;
+
 import static com.fyp.perkblind.HelperClass.displayProgressDialog;
 import static com.fyp.perkblind.HelperClass.hideProgressDialog;
 
@@ -30,10 +34,6 @@ public class LoginToGmail extends AppCompatActivity {
 
     private static final int RC_SIGN_IN = 191;
     private static final String TAG = "GooleSignTAG";
-    private static final String GOOGLE_SIGN_IN = "google_data";
-    private static final String PIC_URI = "Pic_uri";
-    private static final String USERNAME = "username";
-    private static final String LOGED_EMAIL = "user_email";
 
     Button button;
     GoogleSignInOptions gso;
@@ -46,6 +46,10 @@ public class LoginToGmail extends AppCompatActivity {
     String pic = "";
     Uri pic_uri;
     Prefrences prefrences;
+    SpeechTextManager speechManager;
+    Handler handler;
+    Boolean takeInputForText;
+    TextView textv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +61,8 @@ public class LoginToGmail extends AppCompatActivity {
     private void initViews() {
         prefrences = new Prefrences(LoginToGmail.this);
         prefrences.initPrefernce();
+        handler = new Handler();
+        speechManager = new SpeechTextManager(LoginToGmail.this,false);
         profileImage = findViewById(R.id.profileImage);
         PassEnt = findViewById(R.id.PassEnt);
         MailEnt = findViewById(R.id.MailEnt);
@@ -131,10 +137,20 @@ public class LoginToGmail extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == RC_SIGN_IN) {
-            System.out.println("Data ::" + data.toString());
-            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
-            HandleSigninGoogle(task);
+        switch (requestCode) {
+            case 10:
+                if (resultCode == RESULT_OK && data != null) {
+                    ArrayList<String> result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+                    startWriting(result.get(0),textv);
+                }
+                break;
+
+            case RC_SIGN_IN:
+                System.out.println("Data ::" + data.toString());
+                Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+                HandleSigninGoogle(task);
+                break;
+
         }
     }
 
@@ -150,12 +166,35 @@ public class LoginToGmail extends AppCompatActivity {
                     startActivity(tent);
                 }
                 break;
-
             case R.id.mailSign_container:
+                takeInputForText = false;
+                textv = MailEnt;
+                speechManager.setTts_str("You have selected Email Field. Please say Next to enter your email or command dismiss to abort");
+                speechManager.ttsListner();
+                speechManager.speak(speechManager.getTts_str());
 
                 break;
             case R.id.passSign_container:
+                takeInputForText = false;
+                textv = PassEnt;
+                speechManager.setTts_str("You have selected Password Field. Please say Next to enter your email or command dismiss to abort");
+                speechManager.ttsListner();
+                speechManager.speak(speechManager.getTts_str());
                 break;
         }
+
+    }
+
+    private void startWriting(String s, TextView textview) {
+        if (s.equalsIgnoreCase("next") || s.contains("next")) {
+            speechManager.ttsListner();
+            speechManager.speak("Start speaking your name after beep sound");
+            takeInputForText = true;
+        }
+        else if (takeInputForText) {
+            textview.setText(s);
+            takeInputForText = false;
+        }
+
     }
 }

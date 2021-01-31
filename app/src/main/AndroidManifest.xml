@@ -18,7 +18,6 @@
         android:theme="@style/AppTheme">
         <activity android:name=".QRCodeViewer"></activity>
         <activity android:name=".LoginToGmail" />
-        <activity android:name=".gmail.Starred" />
         <activity android:name=".gmail.Inbox" />
         <activity android:name=".Profile" />
         <activity android:name=".PerkGuide" />
