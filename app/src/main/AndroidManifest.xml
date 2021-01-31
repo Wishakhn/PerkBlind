@@ -26,7 +26,7 @@
         <activity android:name=".gmail.ReadMail" />
         <activity android:name=".gmail.SendEmail" />
         <activity android:name=".Register_Login" />
-        <activity android:name=".SplashActivity">
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -34,7 +34,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".IntroSlider" />
-        <activity android:name=".MainActivity" />
+<!--        <activity android:name=".MainActivity" />-->
     </application>
 
 </manifest>
