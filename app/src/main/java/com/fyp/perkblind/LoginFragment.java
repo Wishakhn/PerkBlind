@@ -144,7 +144,7 @@ public class LoginFragment extends Fragment {
                 String password = modelUser.getPassword();
                 UserData data = new UserData(userId, name, email, qr, password, status);
                 prefrences.saveUserData(data);
-                prefrences.saveBooleanPrefernce(prefrences.IS_LOGGED_IN, Boolean.valueOf(status));
+                prefrences.saveBooleanPrefernce(Prefrences.IS_LOGGED_IN, true);
                 Intent intent = new Intent(requireContext(), MainActivity.class);
                 requireActivity().startActivity(intent);
                 requireActivity().finish();

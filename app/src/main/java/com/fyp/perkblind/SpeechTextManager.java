@@ -87,6 +87,28 @@ public class SpeechTextManager implements ISpeechTextManager {
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
     }
 
+
+    public void showOptionDialog(String text) {
+        showDialog = true;
+        AlertDialog.Builder welcomenote = new AlertDialog.Builder(context);
+        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) ;
+        View v = inflater.inflate(R.layout.welcomedialog, null);
+        welcomenote.setView(v);
+        dialog = welcomenote.create();
+        dialog.show();
+        dialog.setCancelable(false);
+        TextView notetext = v.findViewById(R.id.notetext);
+        setTts_str("You have selected "+text+" option to proceed please speak Next or to decline please speak Dismiss. Thank you.");
+        notetext.setText(getTts_str());
+        setSpeechListener(dialog);
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                speak(getTts_str());
+            }
+        }, 1000);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+    }
     @Override
     public void setSpeechListener(final AlertDialog dialog) {
         tts.setOnUtteranceProgressListener(new UtteranceProgressListener() {

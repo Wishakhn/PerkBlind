@@ -66,6 +66,18 @@ public class Prefrences {
         return class_str;
     }
 
+    public String getTargetName(){
+        String class_str = sherdPrefs.getString(KEY_PREFERNCE_CLASS," ");
+        String arr[] = class_str.split(" ");
+        class_str = getClassName(arr[1]);
+        return class_str;
+    }
+    private String getClassName(String s) {
+        String arr_new[] = s.split("\\.");
+        String className = arr_new[arr_new.length-1];
+        return className;
+    }
+
     public void saveUserData(UserData data){
         editor = sherdPrefs.edit();
         Gson gson = new Gson();

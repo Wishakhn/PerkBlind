@@ -100,67 +100,75 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (v.getId()) {
             case R.id.profileBtn:
                 prefrences.saveTargetClass(Profile.class);
-                speechManager.setTts_str(prefrences.getTargetClassName());
+                speechManager.setTts_str(prefrences.getTargetName());
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
                         speechManager.speak(speechManager.getTts_str());
                     }
                 }, 1000);
+                speechManager.showOptionDialog(prefrences.getTargetName());
                 break;
             case R.id.inboxBtn:
                 prefrences.saveTargetClass(Inbox.class);
-                speechManager.setTts_str(prefrences.getTargetClassName());
+                speechManager.setTts_str(prefrences.getTargetName());
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
                         speechManager.speak(speechManager.getTts_str());
                     }
                 }, 1000);
+                speechManager.showOptionDialog(prefrences.getTargetName());
 
                 break;
             case R.id.composeBtn:
                 prefrences.saveTargetClass(SendEmail.class);
-                speechManager.setTts_str(prefrences.getTargetClassName());
+                speechManager.setTts_str(prefrences.getTargetName());
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
                         speechManager.speak(speechManager.getTts_str());
                     }
                 }, 1000);
+                speechManager.showOptionDialog(prefrences.getTargetName());
+
                 break;
             case R.id.draftBtn:
                 prefrences.saveTargetClass(ReadMail.class);
-                speechManager.setTts_str(prefrences.getTargetClassName());
+                speechManager.setTts_str(prefrences.getTargetName());
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
                         speechManager.speak(speechManager.getTts_str());
                     }
                 }, 1000);
+                speechManager.showOptionDialog(prefrences.getTargetName());
+
                 break;
             case R.id.gmailBtn:
 
                 break;
             case R.id.guideBtn:
                 prefrences.saveTargetClass(PerkGuide.class);
-                speechManager.setTts_str(prefrences.getTargetClassName());
+                speechManager.setTts_str(prefrences.getTargetName());
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
                         speechManager.speak(speechManager.getTts_str());
                     }
                 }, 1000);
+                speechManager.showOptionDialog(prefrences.getTargetName());
                 break;
             case R.id.settingBtn:
                 prefrences.saveTargetClass(Settings.class);
-                speechManager.setTts_str(prefrences.getTargetClassName());
+                speechManager.setTts_str(prefrences.getTargetName());
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
                         speechManager.speak(speechManager.getTts_str());
                     }
                 }, 1000);
+                speechManager.showOptionDialog(prefrences.getTargetName());
                 break;
 
         }
