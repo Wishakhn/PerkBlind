@@ -10,4 +10,6 @@ public interface ISpeechTextManager {
     void actOnCommand(String s,Class NextActivity);
     void moveToScreen(Class<?> target_class);
     void showWelcomeDialog();
+    void StopTTS();
+    void pauseTTS();
 }

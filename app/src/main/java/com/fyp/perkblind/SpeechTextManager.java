@@ -21,6 +21,8 @@ import java.util.Locale;
 
 public class SpeechTextManager implements ISpeechTextManager {
     TextToSpeech tts;
+    TextToSpeech tts_alert;
+
     String tts_str = "";
     Handler handler;
     Context context;
@@ -42,7 +44,7 @@ public class SpeechTextManager implements ISpeechTextManager {
 
     @Override
     public void initSpeechTextManager(final Boolean showDialog) {
-        tts = new TextToSpeech(context, new TextToSpeech.OnInitListener() {
+        tts_alert = new TextToSpeech(context, new TextToSpeech.OnInitListener() {
             @Override
             public void onInit(int status) {
                 if (status == TextToSpeech.SUCCESS) {
@@ -55,6 +57,23 @@ public class SpeechTextManager implements ISpeechTextManager {
                         if (showDialog) {
                                    showWelcomeDialog();
                         }
+                    }
+                    Log.i("TTS", "Initialization success.");
+                } else {
+                    Toast.makeText(context, "TTS Initialization failed!", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        tts = new TextToSpeech(context, new TextToSpeech.OnInitListener() {
+            @Override
+            public void onInit(int status) {
+                if (status == TextToSpeech.SUCCESS) {
+                    int ttsLang = tts.setLanguage(Locale.UK);
+                    if (ttsLang == TextToSpeech.LANG_MISSING_DATA
+                            || ttsLang == TextToSpeech.LANG_NOT_SUPPORTED) {
+                        Log.e("TTS", "The Language is not supported!");
+                    } else {
+                        Log.i("TTS", "Language Supported.");
                     }
                     Log.i("TTS", "Initialization success.");
                 } else {
@@ -81,10 +100,24 @@ public class SpeechTextManager implements ISpeechTextManager {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                speak(getTts_str());
+                speakAlert(getTts_str());
             }
         }, 1000);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+    }
+
+    @Override
+    public void StopTTS() {
+        tts.stop();
+        tts.shutdown();
+        tts_alert.stop();
+        tts_alert.shutdown();
+    }
+
+    @Override
+    public void pauseTTS() {
+        if (tts.isSpeaking()) tts.stop();
+    if (tts_alert.isSpeaking())tts_alert.stop();
     }
 
 
@@ -100,7 +133,7 @@ public class SpeechTextManager implements ISpeechTextManager {
         TextView notetext = v.findViewById(R.id.notetext);
         setTts_str("You have selected "+text+" option to proceed please speak Next or to decline please speak Dismiss. Thank you.");
         notetext.setText(getTts_str());
-        setSpeechListener(dialog);
+        ttsListner();
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -109,8 +142,8 @@ public class SpeechTextManager implements ISpeechTextManager {
         }, 1000);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
     }
-    @Override
-    public void setSpeechListener(final AlertDialog dialog) {
+
+    void ttsListner(){
         tts.setOnUtteranceProgressListener(new UtteranceProgressListener() {
             @Override
             public void onStart(String s) {
@@ -122,20 +155,33 @@ public class SpeechTextManager implements ISpeechTextManager {
                 activity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        if (showDialog) {
-                            dialog.dismiss();
-                        } else {
-                            if (getUserSpeech()) {
-                                getSpeechInput();
-                            } else if (getDismissIO()) {
-                                moveToScreen(MainActivity.class);
-                            } else {
-                                setTts_str("To open this screen please command Next and to dismiss your action please command Dismiss");
-                                showWelcomeDialog();
-                                setUserSpeech(true);
-                            }
-                        }
+                        dialog.dismiss();
+                        getSpeechInput();
+                    }
+                });
+            }
 
+            @Override
+            public void onError(String s) {
+
+            }
+        });
+    }
+    @Override
+    public void setSpeechListener(final AlertDialog dialog) {
+        tts_alert.setOnUtteranceProgressListener(new UtteranceProgressListener() {
+            @Override
+            public void onStart(String s) {
+
+            }
+
+            @Override
+            public void onDone(String s) {
+                pauseTTS();
+                activity.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        dialog.dismiss();
                     }
                 });
             }
@@ -175,10 +221,25 @@ public class SpeechTextManager implements ISpeechTextManager {
             tts.speak(text, TextToSpeech.QUEUE_FLUSH, null);
         }
     }
+    public void speakAlert(String text) {
+        float pitch = (float) 0.0f;
+        if (pitch < 0.1) pitch = 1.0f;
+        float speed = (float) 0.0f;
+        if (speed < 0.1) speed = 1.0f;
+
+        tts_alert.setPitch(pitch);
+        tts_alert.setSpeechRate(speed);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            tts_alert.speak(text, TextToSpeech.QUEUE_FLUSH, null, TextToSpeech.ACTION_TTS_QUEUE_PROCESSING_COMPLETED);
+        } else {
+            tts_alert.speak(text, TextToSpeech.QUEUE_FLUSH, null);
+        }
+    }
 
     @Override
     public void actOnCommand(String s, Class NextActivity) {
         if (s.equalsIgnoreCase("next") || s.contains("next")) {
+            Toast.makeText(context, "You have commanded to move to "+NextActivity, Toast.LENGTH_SHORT).show();
             Intent startnext = new Intent(context, NextActivity);
             context.startActivity(startnext);
         } else {

@@ -86,12 +86,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     @Override
-    protected void onPause() {
-        super.onPause();
-        if (speechManager.tts != null) {
-            speechManager.tts.stop();
-            speechManager.tts.shutdown();
-        }
+    protected void onDestroy() {
+        super.onDestroy();
+        speechManager.StopTTS();
     }
 
     @SuppressLint("NonConstantResourceId")
