@@ -91,5 +91,9 @@ public class Prefrences {
         UserData user = gson.fromJson(json, UserData.class);
         return user;
     }
+    public  void  removePrefernce(String key){
+        editor.remove(key);
+        editor.commit();
+    }
 
 }

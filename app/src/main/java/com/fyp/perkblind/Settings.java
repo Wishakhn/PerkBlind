@@ -73,7 +73,7 @@ public class Settings extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 reference.setValue("false");
                 FirebaseAuth.getInstance().signOut();
-                prefs.saveUserState(false);
+                prefs.saveBooleanPrefernce(Prefrences.IS_LOGGED_IN,false);
                 Intent goback = new Intent(Settings.this, Register_Login.class);
                 goback.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(goback);

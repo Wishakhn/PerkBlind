@@ -142,7 +142,7 @@ public class SpeechTextManager implements ISpeechTextManager {
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
     }
 
-    void ttsListner(){
+    public void ttsListner(){
         tts.setOnUtteranceProgressListener(new UtteranceProgressListener() {
             @Override
             public void onStart(String s) {
@@ -154,7 +154,7 @@ public class SpeechTextManager implements ISpeechTextManager {
                 activity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        dialog2.dismiss();
+                        if (showDialog) dialog2.dismiss();
                         getSpeechInput();
                     }
                 });

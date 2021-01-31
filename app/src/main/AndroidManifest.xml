@@ -16,7 +16,8 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".LoginToGmail"></activity>
+        <activity android:name=".QRCodeViewer"></activity>
+        <activity android:name=".LoginToGmail" />
         <activity android:name=".gmail.Starred" />
         <activity android:name=".gmail.Inbox" />
         <activity android:name=".Profile" />
@@ -29,6 +30,7 @@
         <activity android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

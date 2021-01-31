@@ -1,89 +1,123 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.appcompat.widget.LinearLayoutCompat
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".Profile">
-    <include layout="@layout/custom_toolbar"/>
 
-<androidx.appcompat.widget.LinearLayoutCompat
-    android:layout_width="match_parent"
-    android:layout_height="0dp"
-    android:orientation="vertical"
-    android:paddingHorizontal="20dp"
-    android:layout_weight="1">
-    <RelativeLayout
-        android:layout_marginTop="70dp"
+    <include layout="@layout/custom_toolbar" />
+
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <ImageView
-            android:id="@+id/icnmail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_person"
-            app:tint="@color/colorDarkPeach" />
-        <EditText
-            android:id="@+id/NameET"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:paddingHorizontal="20dp">
+
+        <RelativeLayout
+            android:id="@+id/uNameContainer"
             android:layout_width="match_parent"
-            android:singleLine="true"
-            android:imeOptions="actionNext"
             android:layout_height="wrap_content"
-            android:hint="Username"
-            android:layout_toRightOf="@+id/icnmail"
-            android:textColorHint="@color/colorKayiFade"
-            android:textSize="18sp"
-            android:layout_marginLeft="15dp"
-            android:background="@null"
-            android:layout_marginBottom="6dp"
-            android:textColor="@color/colorDarkPeach"
-            android:drawableEnd="@drawable/ic_edit"/>
-    </RelativeLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/colorDarkGrey"/>
+            android:layout_marginTop="70dp"
+            android:onClick="ProfileClickHandler"
+            >
+
+            <ImageView
+                android:id="@+id/icnmail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_person"
+                app:tint="@color/colorDarkPeach"
+                android:onClick="ProfileClickHandler"
+                />
+
+            <EditText
+                android:id="@+id/NameET"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginBottom="6dp"
+                android:layout_toRightOf="@+id/icnmail"
+                android:background="@null"
+                android:enabled="false"
+                android:hint="Username"
+                android:imeOptions="actionNext"
+                android:singleLine="true"
+                android:textColor="@color/colorDarkPeach"
+                android:textColorHint="@color/colorKayiFade"
+                android:textSize="18sp" />
+
+            <ImageView
+                android:id="@+id/editName"
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                android:layout_alignParentEnd="true"
+                android:onClick="ProfileClickHandler"
+                android:src="@drawable/ic_edit" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorDarkGrey" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:layout_marginTop="70dp"
             android:id="@+id/MailET"
             android:layout_width="match_parent"
-            android:singleLine="true"
-            android:imeOptions="actionNext"
             android:layout_height="wrap_content"
-            android:hint="Email"
+            android:layout_marginTop="70dp"
+            android:layout_marginBottom="6dp"
+            android:background="@null"
             android:drawableStart="@drawable/ic_baseline_email_24"
+            android:drawablePadding="15dp"
             android:drawableTint="@color/colorDarkPeach"
             android:gravity="center_vertical"
+            android:hint="Email"
+            android:imeOptions="actionNext"
+            android:singleLine="true"
+            android:textColor="@color/colorDarkPeach"
+            android:textColorHint="@color/colorKayiFade"
+            android:textSize="18sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorDarkGrey" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/viewQR"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="70dp"
+            android:layout_marginBottom="6dp"
+            android:background="@null"
+            android:drawableStart="@drawable/ic_baseline_qr_code_24"
             android:drawablePadding="15dp"
+            android:drawableTint="@color/colorDarkPeach"
+            android:gravity="center_vertical"
+            android:hint="View QR Code"
+            android:imeOptions="actionNext"
+            android:onClick="ProfileClickHandler"
+            android:singleLine="true"
+            android:textColor="@color/colorDarkPeach"
             android:textColorHint="@color/colorKayiFade"
             android:textSize="18sp"
-            android:background="@null"
-            android:layout_marginBottom="6dp"
-            android:textColor="@color/colorDarkPeach"/>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/colorDarkGrey"/>
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/viewQR"
-        android:layout_marginTop="70dp"
-        android:layout_width="match_parent"
-        android:singleLine="true"
-        android:drawableStart="@drawable/ic_baseline_qr_code_24"
-        android:drawablePadding="15dp"
-        android:drawableTint="@color/colorDarkPeach"
-        android:imeOptions="actionNext"
-        android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:textStyle="bold"
-        android:hint="View QR Code"
-        android:textColorHint="@color/colorKayiFade"
-        android:textSize="18sp"
-        android:background="@null"
-        android:layout_marginBottom="6dp"
-        android:textColor="@color/colorDarkPeach"/>
-</androidx.appcompat.widget.LinearLayoutCompat>
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/updateBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ttsoptionspeak"
+            android:layout_centerHorizontal="true"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginTop="60dp"
+            android:background="@drawable/btnbackground_disabled"
+            android:enabled="false"
+            android:text="UPDATE"
+            android:onClick="ProfileClickHandler"
+            android:textColor="@color/colorWhite" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
 </androidx.appcompat.widget.LinearLayoutCompat>
