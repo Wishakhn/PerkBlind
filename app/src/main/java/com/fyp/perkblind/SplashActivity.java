@@ -35,7 +35,7 @@ public class SplashActivity extends AppCompatActivity {
             prefs.saveBooleanPrefernce(FIRST_RUN, true);
             finish();
         } else {
-            if (prefs.loadBooleanPrefernce(prefs.IS_LOGGED_IN)) {
+            if (prefs.loadBooleanPrefernce(Prefrences.IS_LOGGED_IN)) {
                 Intent tent = new Intent(this, MainActivity.class);
                 startActivity(tent);
                 finish();
