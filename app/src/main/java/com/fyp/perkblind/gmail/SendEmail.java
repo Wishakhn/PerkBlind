@@ -34,7 +34,6 @@ public class SendEmail extends AppCompatActivity {
     Button send, reset;
     boolean isSending = false;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,11 +70,9 @@ public class SendEmail extends AppCompatActivity {
                     transport, jsonFactory, mCredential)
                     .setApplicationName("MailBox App")
                     .build();
-
         } else {
             finish();
         }
-
     }
 
     private void initAppBar(String txt) {

@@ -8,6 +8,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class PerkGuide extends AppCompatActivity {
+    SpeechTextManager speechManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
