@@ -1,4 +1,4 @@
-package com.fyp.perkblind;
+package com.fyp.perkblind.gmail;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
@@ -20,6 +20,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.fyp.perkblind.HelperClass;
+import com.fyp.perkblind.Prefrences;
+import com.fyp.perkblind.R;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.api.client.extensions.android.http.AndroidHttp;
 import com.google.api.client.googleapis.extensions.android.gms.auth.GoogleAccountCredential;

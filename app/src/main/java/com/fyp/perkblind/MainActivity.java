@@ -12,6 +12,10 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.fyp.perkblind.gmail.Inbox;
+import com.fyp.perkblind.gmail.SendEmail;
+import com.fyp.perkblind.gmail.Starred;
+
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {

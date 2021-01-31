@@ -1,4 +1,4 @@
-package com.fyp.perkblind;
+package com.fyp.perkblind.gmail;
 
 import android.content.Context;
 import android.content.Intent;
@@ -13,6 +13,10 @@ import androidx.appcompat.widget.AppCompatTextView;
 import androidx.appcompat.widget.LinearLayoutCompat;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.fyp.perkblind.HelperClass;
+import com.fyp.perkblind.R;
+import com.fyp.perkblind.ReadMail;
 
 import java.util.ArrayList;
 import java.util.List;

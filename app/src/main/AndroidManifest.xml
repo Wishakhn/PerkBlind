@@ -17,14 +17,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".LoginToGmail"></activity>
-        <activity android:name=".Starred" />
-        <activity android:name=".Inbox" />
+        <activity android:name=".gmail.Starred" />
+        <activity android:name=".gmail.Inbox" />
         <activity android:name=".Profile" />
         <activity android:name=".PerkGuide" />
         <activity android:name=".QRScanner" />
         <activity android:name=".Settings" />
         <activity android:name=".ReadMail" />
-        <activity android:name=".SendEmail" />
+        <activity android:name=".gmail.SendEmail" />
         <activity android:name=".Register_Login" />
         <activity android:name=".SplashActivity">
             <intent-filter>

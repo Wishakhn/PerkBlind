@@ -1,4 +1,4 @@
-package com.fyp.perkblind;
+package com.fyp.perkblind.gmail;
 
 import com.raizlabs.android.dbflow.annotation.Database;
 

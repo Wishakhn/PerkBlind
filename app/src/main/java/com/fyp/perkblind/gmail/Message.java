@@ -1,4 +1,4 @@
-package com.fyp.perkblind;
+package com.fyp.perkblind.gmail;
 
 
 import com.google.api.services.gmail.model.MessagePart;

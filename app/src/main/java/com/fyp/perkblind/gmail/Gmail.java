@@ -1,4 +1,4 @@
-package com.fyp.perkblind;
+package com.fyp.perkblind.gmail;
 
 public class Gmail {
     public static final String GMAIL_BASE_URL ="https://gmail.googleapis.com";
