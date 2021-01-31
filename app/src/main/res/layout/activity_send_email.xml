@@ -57,6 +57,32 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp">
                 <TextView
+                    android:id="@+id/senderCC"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="CC:"
+                    android:textColor="@color/colorDarkPeach"
+                    android:textSize="17sp"
+                    android:layout_marginLeft="20dp"
+                    android:textStyle="bold"
+                    android:layout_centerVertical="true"/>
+                <TextView
+                    android:id="@+id/senderCCText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="New Magnet Type"
+                    android:textColor="@color/colorBrown"
+                    android:textSize="17sp"
+                    android:layout_toRightOf="@+id/senderCC"
+                    android:layout_marginLeft="20dp"
+                    android:layout_centerVertical="true"/>
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp">
+                <TextView
                     android:id="@+id/senderSubj"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -96,7 +122,6 @@
                     android:id="@+id/senderContentText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="For Certain PurposeFor Certain PurposeFor Certain PurposeFor Certain PurposeFor Certain PurposeFor Certain PurposeFor Certain PurposeFor Certain PurposeFor Certain PurposeFor Certain PurposeFor Certain PurposeFor Certain PurposeFor Certain PurposeFor Certain PurposeFor Certain PurposeFor Certain Purpose "
                     android:textColor="@color/colorBrown"
                     android:textSize="15sp"
                     android:layout_below="@+id/senderContent"
@@ -120,6 +145,27 @@ Thank you,"
                     />
 
             </RelativeLayout>
+
+            <Button
+                android:layout_marginTop="100dp"
+                android:layout_marginBottom="30dp"
+                android:id="@+id/send"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="SEND"
+                android:textColor="@color/colorWhite"
+                android:background="@drawable/btn_yellow_selector"
+                android:layout_marginHorizontal="5dp"
+                />
+            <Button
+                android:layout_marginBottom="30dp"
+                android:id="@+id/reset"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="RE COMPOSE"
+                android:textColor="@color/colorWhite"
+                android:background="@drawable/btn2background_normal"
+                android:layout_marginHorizontal="5dp"       />
 
         </LinearLayout>
     </ScrollView>
