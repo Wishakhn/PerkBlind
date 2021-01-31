@@ -10,7 +10,7 @@
         android:id="@+id/tab"
         layout="@layout/custom_toolbar" />
 
-    <com.example.perkblind.qr.QRCodeReaderView
+    <com.fyp.perkblind.qr.QRCodeReaderView
         android:id="@+id/qrCodeReaderView"
         android:layout_width="0dp"
         android:layout_height="0dp"
