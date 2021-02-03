@@ -172,7 +172,7 @@
                         />
                 </LinearLayout>
                 <LinearLayout
-                    android:id="@+id/impBtn"
+                    android:id="@+id/settingBtn"
                     android:layout_width="150dp"
                     android:layout_height="100dp"
                     android:orientation="vertical"
@@ -184,7 +184,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="STARRED"
+                        android:text="SETTINGS"
                         android:textSize="20sp"
                         android:fontFamily="sans-serif-black"
                         android:textColor="@color/colorBlack"
@@ -192,7 +192,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="STARRED"
+                        android:text="SETTINGS"
                         android:textSize="15sp"
                         android:fontFamily="sans-serif"
                         android:textColor="@color/colorBlack"
@@ -228,33 +228,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="PERK GUIDE"
-                        android:textSize="15sp"
-                        android:fontFamily="sans-serif"
-                        android:textColor="@color/colorBlack"
-                        />
-                </LinearLayout>
-                <LinearLayout
-                    android:id="@+id/settingBtn"
-                    android:layout_width="150dp"
-                    android:layout_height="100dp"
-                    android:orientation="vertical"
-                    android:gravity="center"
-                    android:layout_alignParentRight="true"
-                    android:background="@drawable/block_background"
-                    >
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="SETTINGS"
-                        android:textSize="20sp"
-                        android:fontFamily="sans-serif-black"
-                        android:textColor="@color/colorBlack"
-                        />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="SETTINGS"
                         android:textSize="15sp"
                         android:fontFamily="sans-serif"
                         android:textColor="@color/colorBlack"

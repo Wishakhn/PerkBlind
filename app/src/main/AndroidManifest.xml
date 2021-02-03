@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.perkblind">
+    package="com.fyp.perkblind">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
@@ -13,14 +16,16 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Starred"></activity>
-        <activity android:name=".Inbox" />
+        <activity android:name=".QrCodeGenerater"></activity>
+        <activity android:name=".QRCodeViewer" />
+        <activity android:name=".LoginToGmail" />
+        <activity android:name=".gmail.Inbox" />
         <activity android:name=".Profile" />
         <activity android:name=".PerkGuide" />
         <activity android:name=".QRScanner" />
         <activity android:name=".Settings" />
-        <activity android:name=".ReadMail" />
-        <activity android:name=".SendEmail" />
+        <activity android:name=".gmail.ReadMail" />
+        <activity android:name=".gmail.SendEmail" />
         <activity android:name=".Register_Login" />
         <activity android:name=".SplashActivity">
             <intent-filter>

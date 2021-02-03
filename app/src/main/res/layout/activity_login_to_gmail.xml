@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:weightSum="10"
+    android:layout_height="match_parent"
+    >
+    <include layout="@layout/custom_toolbar"/>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="20dp"
+            android:paddingHorizontal="15dp">
+            <TextView
+                android:id="@+id/titleGmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="SIGN IN TO GMAIL ACCOUNT WITH SIMILAR EMAIL ADDRESS YOU HAVE LOGGED IN TO PERK"
+                android:fontFamily="monospace"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:textSize="17sp"
+                android:textColor="#F44336"
+                />
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/signin_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="visible"
+                android:orientation="vertical">
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:id="@+id/mailSign_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_marginTop="40dp"
+                    android:layout_marginBottom="6dp"
+                    android:gravity="center"
+                    android:onClick="SignInGmailClickHandler"
+                    android:orientation="vertical"
+                    android:padding="10dp">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/MailEnt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:drawableStart="@drawable/ic_baseline_email_24"
+                        android:drawablePadding="15dp"
+                        android:drawableTint="@color/colorDarkPeach"
+                        android:gravity="center_vertical"
+                        android:hint="Email"
+                        android:imeOptions="actionNext"
+                        android:singleLine="true"
+                        android:textColor="@color/colorDarkPeach"
+                        android:textColorHint="@color/colorKayiFade"
+                        android:textSize="18sp" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/colorDarkGrey" />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:id="@+id/passSign_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="6dp"
+                    android:gravity="center"
+                    android:onClick="SignInGmailClickHandler"
+                    android:orientation="vertical"
+                    android:padding="10dp">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/PassEnt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:drawableStart="@drawable/ic_lock_24"
+                        android:drawablePadding="15dp"
+                        android:drawableTint="@color/colorDarkPeach"
+                        android:gravity="center_vertical"
+                        android:hint="User Name"
+                        android:imeOptions="actionNext"
+                        android:singleLine="true"
+                        android:textColor="@color/colorDarkPeach"
+                        android:textColorHint="@color/colorKayiFade"
+                        android:textSize="18sp" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/colorDarkGrey" />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/signinscreen"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone"
+                >
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginBottom="20dp"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:id="@+id/profileImage"
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
+                        android:src="@drawable/circle_background" />
+                </LinearLayout>
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:id="@+id/name_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="10dp"
+                    android:layout_marginTop="40dp"
+                    android:layout_marginBottom="6dp"
+                    android:layout_centerInParent="true"
+                    android:gravity="center"
+                    >
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/NameDisp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:drawableStart="@drawable/ic_person"
+                        android:drawablePadding="15dp"
+                        android:drawableTint="@color/colorDarkPeach"
+                        android:gravity="center_vertical"
+                        android:hint="User Name"
+                        android:imeOptions="actionNext"
+                        android:singleLine="true"
+                        android:textColor="@color/colorDarkPeach"
+                        android:textColorHint="@color/colorKayiFade"
+                        android:textSize="18sp" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/colorDarkGrey" />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:id="@+id/mail_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_centerInParent="true"
+                    android:weightSum="4"
+                    android:padding="10dp"
+                    android:gravity="center_vertical"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="6dp"
+                    >
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/MailDisp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:background="@null"
+                        android:drawableStart="@drawable/ic_baseline_email_24"
+                        android:drawablePadding="15dp"
+                        android:drawableTint="@color/colorDarkPeach"
+                        android:gravity="center_vertical"
+                        android:hint="Email"
+                        android:imeOptions="actionNext"
+                        android:singleLine="true"
+                        android:textColor="@color/colorDarkPeach"
+                        android:textColorHint="@color/colorKayiFade"
+                        android:textSize="18sp" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/colorDarkGrey" />
+                </androidx.appcompat.widget.LinearLayoutCompat>
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="visible"
+                android:layout_marginTop="60dp"
+                android:gravity="center">
+                <!--  <com.google.android.gms.common.SignInButton
+                      android:id="@+id/sign_in_button"
+                      android:layout_marginTop="10dp"
+                      android:layout_width="200dp"
+                      android:layout_height="0dp"
+                      android:layout_weight="1"/>-->
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/sign_in_button"
+                    android:layout_marginHorizontal="30dp"
+                    android:background="@drawable/btn2background_normal"
+                    android:textColor="@color/colorWhite"
+                    android:text="Sign In"
+                    android:onClick="SignInGmailClickHandler"
+                    />
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+</androidx.appcompat.widget.LinearLayoutCompat>
