@@ -192,9 +192,14 @@ public class LoginToGmail extends AppCompatActivity {
             takeInputForText = true;
         }
         else if (takeInputForText) {
-            textview.setText(s);
+            textview.setText(HelperClass.composeTextToEmail(s));
             takeInputForText = false;
         }
+    }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        speechManager.StopTTS();
     }
 }
