@@ -45,13 +45,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         prefrences = new Prefrences(MainActivity.this);
         prefrences.initPrefernce();
         initAppBar("PERK BLIND");
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                speechManager = new SpeechTextManager(MainActivity.this, true);
-
-            }
-        }, 1000);
+        speechManager = new SpeechTextManager(MainActivity.this, true);
         setListeners();
     }
 
