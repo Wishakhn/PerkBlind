@@ -131,4 +131,20 @@ public class HelperClass {
                 contxt.getSystemService(Context.INPUT_METHOD_SERVICE);
         inputMethodManager.hideSoftInputFromWindow(stopEdittext.getWindowToken(), 0);
     }
+
+    public static String  composeTextToEmail(String email){
+        String spacedEmail= email.replace(" ","");
+        String composedEmail ="";
+        String keyOne ="attherateof";
+        String keyTwo ="attherate";
+        if (spacedEmail.contains(keyOne)){
+            composedEmail = spacedEmail.replace(keyOne,"@");
+        }
+        else if (spacedEmail.contains(keyTwo)){
+            composedEmail = spacedEmail.replace(keyTwo,"@");
+        }
+        composedEmail = composedEmail.replace("dot",".");
+        return composedEmail;
+
+    }
 }
