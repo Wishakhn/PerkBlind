@@ -3,9 +3,11 @@ package com.fyp.perkblind;
 import android.content.Intent;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -63,12 +65,22 @@ public class RegisterFragment extends Fragment {
         ConfirmPassET = v.findViewById(R.id.CnfrmPassET);
         regbtn = v.findViewById(R.id.regbtn);
         speechManager = new SpeechTextManager(requireContext(), false);
-        NameET.setOnClickListener(clickListner1);
+      /*  NameET.setOnClickListener(clickListner1);
         MailET.setOnClickListener(clickListner2);
         PassET.setOnClickListener(clickListner3);
-        ConfirmPassET.setOnClickListener(clickListner4);
+        ConfirmPassET.setOnClickListener(clickListner4);*/
         regbtn.setOnClickListener(clickListner);
-
+        ConfirmPassET.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+                if (i == EditorInfo.IME_ACTION_DONE) {
+                    if (validate()) {
+                        regbtn.setEnabled(true);
+                    }
+                }
+                return false;
+            }
+        });
         return v;
     }
 
