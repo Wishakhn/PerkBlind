@@ -39,7 +39,7 @@ public class SpeechTextManager implements ISpeechTextManager {
         this.showDialog = showDialog;
         this.activity = (Activity) activity;
         handler = new Handler();
-        setTts_str(context.getResources().getString(R.string.welcome_note));
+        setTts_str(  context.getResources().getString(R.string.welcome_note));
         initSpeechTextManager(showDialog);
     }
 
@@ -70,7 +70,7 @@ public class SpeechTextManager implements ISpeechTextManager {
             @Override
             public void onInit(int status) {
                 if (status == TextToSpeech.SUCCESS) {
-                    int ttsLang = tts.setLanguage(Locale.UK);
+                    int ttsLang = tts.setLanguage(Locale.getDefault());
                     if (ttsLang == TextToSpeech.LANG_MISSING_DATA
                             || ttsLang == TextToSpeech.LANG_NOT_SUPPORTED) {
                         Log.e("TTS", "The Language is not supported!");

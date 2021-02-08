@@ -4,44 +4,46 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/colorDarkGrey"
+    android:orientation="vertical"
     tools:context=".SplashActivity">
 
-<ImageView
-    android:layout_width="250dp"
-    android:layout_alignParentLeft="true"
-    android:layout_height="match_parent"
-    android:src="@drawable/waves"
-    android:scaleType="centerCrop"
-    android:alpha="0.3"/>
+    <ImageView
+        android:layout_width="250dp"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:alpha="0.3"
+        android:scaleType="centerCrop"
+        android:src="@drawable/waves" />
+
     <TextView
         android:id="@+id/text1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Welcome to"
         android:layout_centerInParent="true"
-        android:textStyle="bold"
+        android:text="Welcome to"
         android:textColor="@color/colorDarkPeach"
-        android:textSize="25sp"/>
+        android:textSize="25sp"
+        android:textStyle="bold" />
+
     <TextView
         android:id="@+id/sub"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="PERK BLIND"
-        android:textStyle="bold"
-        android:layout_centerHorizontal="true"
         android:layout_below="@+id/text1"
+        android:layout_centerHorizontal="true"
+        android:text="PERK BLIND"
         android:textColor="@color/colorMustard"
-        android:textSize="50sp"/>
+        android:textSize="50sp"
+        android:textStyle="bold" />
+
     <ImageView
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:src="@drawable/perk_icon"
         android:layout_below="@+id/sub"
-        android:scaleType="centerCrop"
         android:layout_alignParentRight="true"
-        android:layout_marginRight="40dp"/>
-
+        android:layout_marginRight="40dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/perk_icon" />
 
 </RelativeLayout>
