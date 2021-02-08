@@ -29,6 +29,7 @@ import java.util.HashMap;
 
 import static android.app.Activity.RESULT_OK;
 import static com.fyp.perkblind.HelperClass.REQUEST_SPEECH_INPUT;
+import static com.fyp.perkblind.HelperClass.composeTextToEmail;
 import static com.fyp.perkblind.HelperClass.displayProgressDialog;
 import static com.fyp.perkblind.HelperClass.hideProgressDialog;
 
@@ -190,7 +191,12 @@ public class RegisterFragment extends Fragment {
     }
 
     private void fillTheField(String s, EditText t) {
-        t.setText(s);
+        if (t == MailET){
+            t.setText(composeTextToEmail(s));
+        }
+        else {
+            t.setText(s);
+        }
         if (validate()) {
             regbtn.setEnabled(true);
         }

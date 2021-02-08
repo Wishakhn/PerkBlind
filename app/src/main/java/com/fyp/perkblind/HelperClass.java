@@ -138,11 +138,15 @@ public class HelperClass {
         String composedEmail ="";
         String keyOne ="attherateof";
         String keyTwo ="attherate";
+        String keyThree ="at";
         if (spacedEmail.contains(keyOne)){
             composedEmail = spacedEmail.replace(keyOne,"@");
         }
         else if (spacedEmail.contains(keyTwo)){
             composedEmail = spacedEmail.replace(keyTwo,"@");
+        }
+        else if(spacedEmail.contains(keyThree)){
+            composedEmail = spacedEmail.replace(keyThree,"@");
         }
         composedEmail = composedEmail.replace("dot",".");
         return composedEmail;
