@@ -195,7 +195,7 @@ public class Inbox extends AppCompatActivity {
                         Inbox.this.refreshMessages.setRefreshing(true);
                     }
                 });
-                String user = "me";
+                String user = sharedPref.fetchUserGmailData().id;
                 String query = "in:inbox";
                 ListMessagesResponse messageResponse = mService.users().messages().list(user).setQ(query).setMaxResults(20L).setPageToken(Inbox.this.pageToken).execute();
                 Inbox.this.pageToken = messageResponse.getNextPageToken();

@@ -19,6 +19,8 @@ import android.widget.Toast;
 
 import java.util.Locale;
 
+import static com.fyp.perkblind.HelperClass.REQUEST_SPEECH_INPUT;
+
 public class SpeechTextManager implements ISpeechTextManager {
     TextToSpeech tts;
     TextToSpeech tts_alert;
@@ -48,7 +50,7 @@ public class SpeechTextManager implements ISpeechTextManager {
             @Override
             public void onInit(int status) {
                 if (status == TextToSpeech.SUCCESS) {
-                    int ttsLang = tts.setLanguage(Locale.UK);
+                    int ttsLang = tts_alert.setLanguage(Locale.UK);
                     if (ttsLang == TextToSpeech.LANG_MISSING_DATA
                             || ttsLang == TextToSpeech.LANG_NOT_SUPPORTED) {
                         Log.e("TTS", "The Language is not supported!");
@@ -198,7 +200,7 @@ public class SpeechTextManager implements ISpeechTextManager {
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
         if (intent.resolveActivity(context.getPackageManager()) != null) {
-            activity.startActivityForResult(intent, 10);
+            activity.startActivityForResult(intent, REQUEST_SPEECH_INPUT);
         } else {
             Toast.makeText(context, "Your Device Don't Support Speech Input", Toast.LENGTH_SHORT).show();
         }

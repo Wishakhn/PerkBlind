@@ -31,6 +31,7 @@ public class HelperClass {
     public static final int REQUEST_AUTHORIZATION = 1001;
     public static final int REQUEST_GOOGLE_PLAY_SERVICES = 1004;
     public static final int REQUEST_PERMISSION_GET_ACCOUNTS = 1003;
+    public static final int REQUEST_SPEECH_INPUT = 10;
 
     public static final String TAG = "PerkBlindApp";
     public static final String[] SCOPES = {GmailScopes.MAIL_GOOGLE_COM};

@@ -18,6 +18,8 @@ import com.fyp.perkblind.gmail.SendEmail;
 
 import java.util.ArrayList;
 
+import static com.fyp.perkblind.HelperClass.REQUEST_SPEECH_INPUT;
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     LinearLayout profileBtn;
     LinearLayout inboxBtn;
@@ -71,7 +73,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onActivityResult(requestCode, resultCode, data);
 
         switch (requestCode) {
-            case 10:
+            case REQUEST_SPEECH_INPUT:
                 if (resultCode == RESULT_OK && data != null) {
                     ArrayList<String> result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
                     try {
