@@ -14,9 +14,12 @@ import androidx.appcompat.widget.AppCompatImageView;
 
 import com.fyp.perkblind.qr.QRCodeReaderView;
 
+import static com.fyp.perkblind.HelperClass.checkCameraPermissions;
+
 public class QRScanner extends AppCompatActivity implements QRCodeReaderView.OnQRCodeReadListener {
     QRCodeReaderView qrCodeReaderView;
     AppCompatImageView ivMyQrCode, ivLibrary;
+    HelperClass helper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,10 +30,11 @@ public class QRScanner extends AppCompatActivity implements QRCodeReaderView.OnQ
     }
 
     private void initViews() {
+        helper = new HelperClass(QRScanner.this);
         qrCodeReaderView = findViewById(R.id.qrCodeReaderView);
         ivMyQrCode = findViewById(R.id.ivMyQrCode);
         ivLibrary = findViewById(R.id.ivLibrary);
-        if (HelperClass.checkCameraPermissions(QRScanner.this)) {
+        if (checkCameraPermissions(QRScanner.this)) {
             initQRCodeReaderView();
         } else {
             requestPermissions(getPermissions(), 1005);

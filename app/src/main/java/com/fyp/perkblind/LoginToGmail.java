@@ -25,6 +25,8 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 
 import static com.fyp.perkblind.HelperClass.displayProgressDialog;
@@ -35,7 +37,7 @@ public class LoginToGmail extends AppCompatActivity {
     private static final int RC_SIGN_IN = 191;
     private static final String TAG = "GooleSignTAG";
 
-    Button button;
+    TextView button;
     GoogleSignInOptions gso;
     GoogleSignInClient googleSignInClient;
     ImageView profileImage;
@@ -50,6 +52,7 @@ public class LoginToGmail extends AppCompatActivity {
     Handler handler;
     Boolean takeInputForText;
     TextView textv;
+    TextView titleGmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,13 +67,13 @@ public class LoginToGmail extends AppCompatActivity {
         handler = new Handler();
         speechManager = new SpeechTextManager(LoginToGmail.this,false);
         profileImage = findViewById(R.id.profileImage);
-        PassEnt = findViewById(R.id.PassEnt);
-        MailEnt = findViewById(R.id.MailEnt);
         NameDisp = findViewById(R.id.NameDisp);
         MailDisp = findViewById(R.id.MailDisp);
         button = findViewById(R.id.sign_in_button);
+        titleGmail = findViewById(R.id.titleGmail);
         signin_container = findViewById(R.id.name_container);
         signinscreen = findViewById(R.id.signinscreen);
+        speechManager.speak(titleGmail.getText().toString());
         gso = new GoogleSignInOptions
                 .Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
@@ -165,21 +168,6 @@ public class LoginToGmail extends AppCompatActivity {
                     tent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(tent);
                 }
-                break;
-            case R.id.mailSign_container:
-                takeInputForText = false;
-                textv = MailEnt;
-                speechManager.setTts_str("You have selected Email Field. Please say Next to enter your email or command dismiss to abort");
-                speechManager.ttsListner();
-                speechManager.speak(speechManager.getTts_str());
-
-                break;
-            case R.id.passSign_container:
-                takeInputForText = false;
-                textv = PassEnt;
-                speechManager.setTts_str("You have selected Password Field. Please say Next to enter your email or command dismiss to abort");
-                speechManager.ttsListner();
-                speechManager.speak(speechManager.getTts_str());
                 break;
         }
 

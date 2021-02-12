@@ -8,12 +8,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 public class QrCodeGenerater extends AppCompatActivity {
+    HelperClass helper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_qr_code_generater);
         initAppBar("QR CODE GENERATOR");
+        helper = new HelperClass(QrCodeGenerater.this);
+
 
     }
     private void initAppBar(String txt) {

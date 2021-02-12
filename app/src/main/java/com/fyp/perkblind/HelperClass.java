@@ -37,7 +37,7 @@ public class HelperClass {
     public static final String[] SCOPES = {GmailScopes.MAIL_GOOGLE_COM};
     public static final String PREF_ACCOUNT_NAME = "accountName";
 
-    private Context mContext;
+    private static Context mContext;
 
     public HelperClass(Context context) {
         this.mContext = context;
@@ -114,9 +114,9 @@ public class HelperClass {
     }
 
     public static boolean checkCameraPermissions(Context context) {
-        int writeExternalResults = ContextCompat.checkSelfPermission(context, "android.permission.WRITE_EXTERNAL_STORAGE");
-        int checkSelfPermission = ContextCompat.checkSelfPermission(context, "android.permission.READ_EXTERNAL_STORAGE");
-        int checkCameraPermission = ContextCompat.checkSelfPermission(context, "android.permission.CAMERA");
+        int writeExternalResults = ContextCompat.checkSelfPermission(mContext, "android.permission.WRITE_EXTERNAL_STORAGE");
+        int checkSelfPermission = ContextCompat.checkSelfPermission(mContext, "android.permission.READ_EXTERNAL_STORAGE");
+        int checkCameraPermission = ContextCompat.checkSelfPermission(mContext, "android.permission.CAMERA");
         return writeExternalResults == 0 && checkCameraPermission == 0 && checkSelfPermission == 0;
     }
 

@@ -2,6 +2,7 @@ package com.fyp.perkblind;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -22,6 +23,7 @@ import java.util.Set;
 public class Settings extends AppCompatActivity {
     Prefrences prefs;
     SpeechTextManager speechManager;
+    Handler handler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +31,7 @@ public class Settings extends AppCompatActivity {
         setContentView(R.layout.activity_settings);
         prefs = new Prefrences(Settings.this);
         prefs.initPrefernce();
+        handler = new Handler();
         speechManager = new SpeechTextManager(Settings.this, false);
         initAppBar("SETTINGS");
     }
@@ -41,12 +44,24 @@ public class Settings extends AppCompatActivity {
                 moveSimpleIntent(PerkGuide.class);
                 break;
             case R.id.genQR:
-
+                navigateTo();
                 break;
             case R.id.logout:
                 logoutUser();
                 break;
         }
+    }
+
+    private void navigateTo() {
+        prefs.saveTargetClass(QrCodeGenerater.class);
+                speechManager.setTts_str("You have selected QR COde generator class");
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        speechManager.speak(speechManager.getTts_str());
+                    }
+                }, 1000);
+                speechManager.showOptionDialog(prefs.getTargetName());
     }
 
     private void moveSimpleIntent(Class<?> target) {

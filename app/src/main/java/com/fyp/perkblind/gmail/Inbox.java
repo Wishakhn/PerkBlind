@@ -24,6 +24,7 @@ import com.fyp.perkblind.HelperClass;
 import com.fyp.perkblind.Prefrences;
 import com.fyp.perkblind.R;
 import com.google.android.gms.common.GoogleApiAvailability;
+import com.google.android.gms.common.api.Response;
 import com.google.api.client.extensions.android.http.AndroidHttp;
 import com.google.api.client.googleapis.extensions.android.gms.auth.GoogleAccountCredential;
 import com.google.api.client.googleapis.extensions.android.gms.auth.GooglePlayServicesAvailabilityIOException;
@@ -33,6 +34,7 @@ import com.google.api.client.json.JsonFactory;
 import com.google.api.client.json.jackson2.JacksonFactory;
 import com.google.api.client.util.ExponentialBackOff;
 import com.google.api.services.gmail.Gmail;
+import com.google.api.services.gmail.GmailScopes;
 import com.google.api.services.gmail.model.ListMessagesResponse;
 import com.google.api.services.gmail.model.MessagePartHeader;
 import com.raizlabs.android.dbflow.sql.language.Delete;
@@ -60,8 +62,14 @@ public class Inbox extends AppCompatActivity {
     Prefrences sharedPref;
     HelperClass mUtils;
     LinearLayoutCompat lytParent;
-
-
+    String[] SCOPES = {
+            GmailScopes.GMAIL_LABELS,
+            GmailScopes.GMAIL_COMPOSE,
+            GmailScopes.GMAIL_INSERT,
+            GmailScopes.GMAIL_MODIFY,
+            GmailScopes.GMAIL_READONLY,
+            GmailScopes.MAIL_GOOGLE_COM
+    };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -121,8 +129,8 @@ public class Inbox extends AppCompatActivity {
             @Override
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
-                if (!isFetching && mUtils.isDeviceOnline())
-                    new GetEmailsTask(false).execute();
+             /*   if (!isFetching && mUtils.isDeviceOnline())
+                    new GetEmailsTask(false).execute();*/
             }
         });
         listMessages.setAdapter(messagesAdapter);
@@ -133,26 +141,13 @@ public class Inbox extends AppCompatActivity {
     }
 
     private void initGmailInbox() {
+// Initialize credentials and service object.
         mCredential = GoogleAccountCredential.usingOAuth2(
                 getApplicationContext(), Arrays.asList(SCOPES))
                 .setBackOff(new ExponentialBackOff());
-        mService = null;
-        String accountName = sharedPref.loadStringPreference(PREF_ACCOUNT_NAME);
-        if (accountName != null) {
-            mCredential.setSelectedAccountName(accountName);
+               if (!isFetching && mUtils.isDeviceOnline())
+                    new GetEmailsTask(false).execute();
 
-            HttpTransport transport = AndroidHttp.newCompatibleTransport();
-            JsonFactory jsonFactory = JacksonFactory.getDefaultInstance();
-            mService = new com.google.api.services.gmail.Gmail.Builder(
-                    transport, jsonFactory, mCredential)
-                    .setApplicationName("PerkBlind App")
-                    .build();
-
-        } else {
-            finish();
-        }
-        messageList = new ArrayList<>();
-        messagesAdapter = new MessagesAdapter(Inbox.this, messageList);
     }
 
     private void initAppBar(String txt) {

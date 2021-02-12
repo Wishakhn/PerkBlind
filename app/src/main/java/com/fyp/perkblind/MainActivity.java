@@ -102,7 +102,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 speechManager.showOptionDialog(prefrences.getTargetName());
                 break;
             case R.id.inboxBtn:
-                prefrences.saveTargetClass(Inbox.class);
+            /*    prefrences.saveTargetClass(Inbox.class);
                 speechManager.setTts_str(prefrences.getTargetName());
                 handler.postDelayed(new Runnable() {
                     @Override
@@ -110,7 +110,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         speechManager.speak(speechManager.getTts_str());
                     }
                 }, 1000);
-                speechManager.showOptionDialog(prefrences.getTargetName());
+                speechManager.showOptionDialog(prefrences.getTargetName());*/
+                Intent tent = new Intent(this,Inbox.class);
+                startActivity(tent);
 
                 break;
             case R.id.composeBtn:
