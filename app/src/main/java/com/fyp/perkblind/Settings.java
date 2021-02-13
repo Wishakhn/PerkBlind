@@ -41,10 +41,10 @@ public class Settings extends AppCompatActivity {
             case R.id.changPass:
                 break;
             case R.id.setGuide:
-                moveSimpleIntent(PerkGuide.class);
+                navigateTo(PerkGuide.class,"You have selected PERK Guide option now we are navigating to to Perk Guide screen ");
                 break;
             case R.id.genQR:
-                navigateTo();
+                navigateTo(QrCodeGenerater.class,"You have selected QR COde generator now we are navigating to to QR Code Generator screen");
                 break;
             case R.id.logout:
                 logoutUser();
@@ -52,9 +52,9 @@ public class Settings extends AppCompatActivity {
         }
     }
 
-    private void navigateTo() {
-        prefs.saveTargetClass(QrCodeGenerater.class);
-                speechManager.setTts_str("You have selected QR COde generator class");
+    private void navigateTo(Class<?> target, String tsr) {
+        prefs.saveTargetClass(target);
+                speechManager.setTts_str(tsr);
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {

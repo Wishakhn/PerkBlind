@@ -152,6 +152,7 @@ public class LoginToGmail extends AppCompatActivity {
                 System.out.println("Data ::" + data.toString());
                 Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
                 HandleSigninGoogle(task);
+                hideProgressDialog();
                 break;
 
         }

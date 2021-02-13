@@ -12,7 +12,6 @@ import android.widget.ImageView;
 import android.widget.SearchView;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.LinearLayoutCompat;
 import androidx.recyclerview.widget.DefaultItemAnimator;
@@ -24,7 +23,6 @@ import com.fyp.perkblind.HelperClass;
 import com.fyp.perkblind.Prefrences;
 import com.fyp.perkblind.R;
 import com.google.android.gms.common.GoogleApiAvailability;
-import com.google.android.gms.common.api.Response;
 import com.google.api.client.extensions.android.http.AndroidHttp;
 import com.google.api.client.googleapis.extensions.android.gms.auth.GoogleAccountCredential;
 import com.google.api.client.googleapis.extensions.android.gms.auth.GooglePlayServicesAvailabilityIOException;
@@ -38,17 +36,23 @@ import com.google.api.services.gmail.GmailScopes;
 import com.google.api.services.gmail.model.ListMessagesResponse;
 import com.google.api.services.gmail.model.MessagePartHeader;
 import com.raizlabs.android.dbflow.sql.language.Delete;
+import com.raizlabs.android.dbflow.sql.language.SQLite;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 
-import static com.fyp.perkblind.HelperClass.PREF_ACCOUNT_NAME;
+import javax.mail.Folder;
+import javax.mail.MessagingException;
+import javax.mail.NoSuchProviderException;
+import javax.mail.Session;
+import javax.mail.Store;
+
 import static com.fyp.perkblind.HelperClass.REQUEST_AUTHORIZATION;
 import static com.fyp.perkblind.HelperClass.REQUEST_GOOGLE_PLAY_SERVICES;
-import static com.fyp.perkblind.HelperClass.SCOPES;
 
 public class Inbox extends AppCompatActivity {
     SwipeRefreshLayout refreshMessages;
@@ -70,6 +74,7 @@ public class Inbox extends AppCompatActivity {
             GmailScopes.GMAIL_READONLY,
             GmailScopes.MAIL_GOOGLE_COM
     };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,11 +86,75 @@ public class Inbox extends AppCompatActivity {
         sharedPref.initPrefernce();
         mUtils = new HelperClass(Inbox.this);
         initAppBar("INBOX");
-        initGmailInbox();
-        initViews();
+       // initGmailAPI();
+        Thread thread = new Thread(new Runnable() {
+
+            @Override
+            public void run() {
+                try  {
+                    getMessages();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        thread.start();
     }
 
-    private void initViews() {
+    void getMessages(){
+        Properties props = new Properties();
+        //IMAPS protocol
+        props.setProperty("mail.store.protocol", "imaps");
+        //Set host address
+        props.setProperty("mail.imaps.host", "imaps.gmail.com");
+        //Set specified port
+        props.setProperty("mail.imaps.port", "993");
+        //Using SSL
+        props.setProperty("mail.imaps.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+        props.setProperty("mail.imaps.socketFactory.fallback", "false");
+        Session imapSession = Session.getInstance(props);
+        Store store = null;
+        try {
+            store = imapSession.getStore("imaps");
+            store.connect("imap.gmail.com", "wishakhn@gmail.com", "d0ntmesswithme.");
+            Folder inbox = store.getFolder("Inbox");
+            inbox.open(Folder.READ_WRITE);
+            javax.mail.Message[] msgs =inbox.getMessages();
+            System.out.println("You got your inbox"+inbox.getMessage(4));
+        } catch (NoSuchProviderException e) {
+            e.printStackTrace();
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }
+
+    }
+    private void initGmailAPI() {
+        // Initialize credentials and service object.
+        mCredential = GoogleAccountCredential.usingOAuth2(
+                getApplicationContext(), Arrays.asList(SCOPES))
+                .setBackOff(new ExponentialBackOff());
+        mService = null;
+        String accountName = "wishakhn";
+        if (accountName != null) {
+            mCredential.setSelectedAccountName(accountName);
+
+            HttpTransport transport = AndroidHttp.newCompatibleTransport();
+            JsonFactory jsonFactory = JacksonFactory.getDefaultInstance();
+            mService = new com.google.api.services.gmail.Gmail.Builder(
+                    transport, jsonFactory, mCredential)
+                    .setApplicationName("MailBox App")
+                    .build();
+
+        } else {
+            finish();
+        }
+        messageList = new ArrayList<>();
+        messagesAdapter = new MessagesAdapter(this, messageList);
+        initView();
+    }
+
+    private void initView() {
         SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
         SearchView searchView = (SearchView) findViewById(R.id.action_search);
         searchView.setQueryHint(getString(R.string.search));
@@ -117,38 +186,27 @@ public class Inbox extends AppCompatActivity {
             }
         });
 
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(Inbox.this);
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
         listMessages.setLayoutManager(mLayoutManager);
         listMessages.setItemAnimator(new DefaultItemAnimator());
-        listMessages.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
-                super.onScrollStateChanged(recyclerView, newState);
-            }
-
-            @Override
-            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-             /*   if (!isFetching && mUtils.isDeviceOnline())
-                    new GetEmailsTask(false).execute();*/
-            }
-        });
         listMessages.setAdapter(messagesAdapter);
-
+     /*   if (!isFetching && mUtils.isDeviceOnline())
+            new GetEmailsTask(false).execute();*/
     }
 
     private void getMessagesFromDB() {
+        refreshMessages.setRefreshing(true);
+        messageList.clear();
+        messageList.addAll(SQLite.select().from(Message.class).queryList());
+        messagesAdapter.notifyDataSetChanged();
+        refreshMessages.setRefreshing(false);
+
+        if (mUtils.isDeviceOnline())
+            new GetEmailsTask(true).execute();
+        else
+            mUtils.showSnackbar(lytParent, getString(R.string.device_is_offline));
     }
 
-    private void initGmailInbox() {
-// Initialize credentials and service object.
-        mCredential = GoogleAccountCredential.usingOAuth2(
-                getApplicationContext(), Arrays.asList(SCOPES))
-                .setBackOff(new ExponentialBackOff());
-               if (!isFetching && mUtils.isDeviceOnline())
-                    new GetEmailsTask(false).execute();
-
-    }
 
     private void initAppBar(String txt) {
         ImageView back = findViewById(R.id.backarrow);
@@ -180,20 +238,20 @@ public class Inbox extends AppCompatActivity {
 
             if (clear) {
                 Delete.table(Message.class);
-                Inbox.this.pageToken = null;
+                pageToken = null;
             }
 
             try {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Inbox.this.refreshMessages.setRefreshing(true);
+                        refreshMessages.setRefreshing(true);
                     }
                 });
-                String user = sharedPref.fetchUserGmailData().id;
+                String user = "me";
                 String query = "in:inbox";
-                ListMessagesResponse messageResponse = mService.users().messages().list(user).setQ(query).setMaxResults(20L).setPageToken(Inbox.this.pageToken).execute();
-                Inbox.this.pageToken = messageResponse.getNextPageToken();
+                ListMessagesResponse messageResponse = mService.users().messages().list(user).setQ(query).setMaxResults(20L).setPageToken(pageToken).execute();
+                pageToken = messageResponse.getNextPageToken();
 
                 messageListReceived = new ArrayList<>();
                 List<com.google.api.services.gmail.model.Message> receivedMessages = messageResponse.getMessages();
@@ -213,7 +271,7 @@ public class Inbox extends AppCompatActivity {
                             headers,
                             actualMessage.getPayload().getParts(),
                             actualMessage.getInternalDate(),
-                            Inbox.this.mUtils.getRandomMaterialColor(),
+                            mUtils.getRandomMaterialColor(),
                             actualMessage.getPayload()
                     );
 
@@ -223,7 +281,7 @@ public class Inbox extends AppCompatActivity {
                     itemCount++;
                 }
             } catch (Exception e) {
-                Log.w(mUtils.TAG, e);
+                Log.w("TAG_GMAIL", e);
                 mLastError = e;
                 cancel(true);
             }
@@ -237,29 +295,29 @@ public class Inbox extends AppCompatActivity {
 
             if (output != null && output.size() != 0) {
                 if (clear) {
-                    Inbox.this.messageList.clear();
-                    Inbox.this.messageList.addAll(output);
-                    Inbox.this.messagesAdapter.notifyDataSetChanged();
+                    messageList.clear();
+                    messageList.addAll(output);
+                    messagesAdapter.notifyDataSetChanged();
                 } else {
-                    int listSize = Inbox.this.messageList.size();
-                    Inbox.this.messageList.addAll(output);
-                    Inbox.this.messagesAdapter.notifyItemRangeInserted(listSize, itemCount);
+                    int listSize = messageList.size();
+                    messageList.addAll(output);
+                    messagesAdapter.notifyItemRangeInserted(listSize, itemCount);
                 }
 
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Inbox.this.refreshMessages.setRefreshing(false);
+                        refreshMessages.setRefreshing(false);
                     }
                 });
             } else {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Inbox.this.refreshMessages.setRefreshing(false);
+                        refreshMessages.setRefreshing(false);
                     }
                 });
-                Inbox.this.mUtils.showSnackbar(lytParent, getString(R.string.fetch_failed));
+                mUtils.showSnackbar(lytParent, getString(R.string.fetch_failed));
             }
         }
 
@@ -270,7 +328,7 @@ public class Inbox extends AppCompatActivity {
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    Inbox.this.refreshMessages.setRefreshing(false);
+                    refreshMessages.setRefreshing(false);
                 }
             });
             if (mLastError != null) {
@@ -296,9 +354,10 @@ public class Inbox extends AppCompatActivity {
             final int connectionStatusCode) {
         GoogleApiAvailability apiAvailability = GoogleApiAvailability.getInstance();
         Dialog dialog = apiAvailability.getErrorDialog(
-                Inbox.this,
+                this,
                 connectionStatusCode,
                 REQUEST_GOOGLE_PLAY_SERVICES);
         dialog.show();
     }
+
 }
